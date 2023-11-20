@@ -1,0 +1,31 @@
+from ev3dev2.motor import MediumMotor, OUTPUT_A, OUTPUT_B, SpeedPercent
+from ev3dev2.sensor import INPUT_1, INPUT_2
+from ev3dev2.sensor.lego import ColorSensor, UltrasonicSensor
+from time import sleep
+
+# Initialisation des moteurs et des capteurs
+pan_motor = MediumMotor(OUTPUT_A)  # Remplacer OUTPUT_A par le port correspondant
+tilt_motor = MediumMotor(OUTPUT_B)  # Remplacer OUTPUT_B par le port correspondant
+color_sensor = ColorSensor(INPUT_1)  # Remplacer INPUT_1 par le port correspondant
+ultrasonic_sensor = UltrasonicSensor(INPUT_2)  # Remplacer INPUT_2 par le port correspondant
+
+# Paramètres de balayage
+pan_range = range(-90, 91, 10)  # Plage de mouvement horizontal
+tilt_range = range(-45, 46, 10)  # Plage de mouvement vertical
+
+# Fonction de balayage
+def scan_area():
+    for pan_angle in pan_range:
+        pan_motor.on_to_position(SpeedPercent(15), pan_angle)
+        for tilt_angle in tilt_range:
+            tilt_motor.on_to_position(SpeedPercent(15), tilt_angle)
+            sleep(0.5)  # Temps d'attente pour la stabilisation
+
+            # Vérification de la couleur
+            if color_sensor.color == ColorSensor.COLOR_RED:
+                distance = ultrasonic_sensor.distance_centimeters
+                print(f"Objet rouge détecté à {distance} cm")
+                return distance
+
+# Exécution du balayage
+scan_area()
