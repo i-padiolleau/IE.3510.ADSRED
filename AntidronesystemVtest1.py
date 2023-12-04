@@ -1,7 +1,7 @@
 from ev3dev2.motor import LargeMotor
 from ev3dev2.sensor import INPUT_1, INPUT_2
 from ev3dev2.sensor.lego import UltrasonicSensor
-from pyb_pixy import Pixy
+from pixy2 import Pixy2
 
 # Constants
 DIST_THRESHOLD = 40  # Distance threshold in centimeters
@@ -19,7 +19,7 @@ motor_up_down_1 = LargeMotor('outB')
 motor_up_down_2 = LargeMotor('outC')
 
 # Connect the Pixy2 camera to any input port, e.g., input port 2
-pixy = Pixy(INPUT_2)
+pixy = Pixy2(INPUT_2)
 
 # Configure the sensors
 us.mode = 'US-DIST-CM'
@@ -51,7 +51,7 @@ def turn_up_down(angle):
 while True:
     distance = measure_distance()
     detected_objects = pixy.get_blocks()
-    
+
     print("Distance: {} cm, Detected Objects: {}".format(distance, detected_objects))
 
     # Check if the distance is greater than the threshold
