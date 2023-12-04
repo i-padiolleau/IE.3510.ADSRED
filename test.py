@@ -7,5 +7,6 @@ from ev3dev2.sensor import INPUT_1
 from ev3dev2.sensor.lego import TouchSensor
 from ev3dev2.led import Leds
 
-m = LargeMotor(OUTPUT_A)
-m.on_for_rotations(SpeedPercent(75), 5)
+from pixycamev3.pixy2 import Pixy2
+
+pixy2 = Pixy2(port=2, i2c_address=0x54)
