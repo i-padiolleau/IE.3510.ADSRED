@@ -11,8 +11,10 @@ from pixycamev3.pixy2 import Pixy2
 
 pixy2 = Pixy2(port=2, i2c_address=0x54)
 
+pixy2.set_lamp(1, 0)
+
 while True :
-    a = pixy2.get_blocks(sigmap=1)
+    a = pixy2.get_blocks(1,1)
     print(a)
 
     sleep(1000)
