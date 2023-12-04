@@ -1,5 +1,7 @@
-from ev3dev.ev3 import *
-import time
+from ev3dev2.motor import LargeMotor
+from ev3dev2.sensor import INPUT_1, INPUT_2
+from ev3dev2.sensor.lego import UltrasonicSensor
+from pyb_pixy import Pixy
 
 # Constants
 DIST_THRESHOLD = 40  # Distance threshold in centimeters
@@ -7,34 +9,24 @@ MOTOR_RUNTIME = 5000  # Motor runtime in milliseconds
 MOTOR_SPEED = 500  # Motor speed in degrees per second
 TURN_ANGLE = 180  # Turn angle in degrees
 TURN_ANGLE_UP_DOWN = 90  # Turn angle for up and down motion in degrees
-SEARCH_COLOR = ColorSensor.COLOR_RED  # Change to the desired color
 
 # Connect the Ultrasonic Sensor to any input port, e.g., input port 1
-us = UltrasonicSensor('in1')
+us = UltrasonicSensor(INPUT_1)
 
 # Connect large motors to different output ports, e.g., output port A, B, and C
 motor_forward = LargeMotor('outA')
 motor_up_down_1 = LargeMotor('outB')
 motor_up_down_2 = LargeMotor('outC')
 
-# Connect a color sensor to any input port, e.g., input port 2
-color_sensor = ColorSensor('in2')
-
-# Ensure the sensors and motors are connected
-
-#assert us.connected, "Connect a single ultrasonic sensor to any sensor port"
-#assert motor_forward.connected, "Connect a large motor to any motor port for forward motion"
-#assert motor_up_down_1.connected, "Connect a large motor to any motor port for up and down motion 1"
-#assert motor_up_down_2.connected, "Connect a large motor to any motor port for up and down motion 2"
-#assert color_sensor.connected, "Connect a color sensor to any sensor port"
+# Connect the Pixy2 camera to any input port, e.g., input port 2
+pixy = Pixy(INPUT_2)
 
 # Configure the sensors
 us.mode = 'US-DIST-CM'
-color_sensor.mode = 'COL-COLOR'  # Set color sensor to detect colors
 
 # Function to measure and return the distance
 def measure_distance():
-    return us.value() / 10  # convert mm to cm
+    return us.distance_centimeters
 
 # Function to move the robot forward for a specified time
 def move_forward(time_sp):
@@ -58,23 +50,19 @@ def turn_up_down(angle):
 # Testing the sensors and motors
 while True:
     distance = measure_distance()
-    color = color_sensor.value()
-
-    print("Distance: {} cm, Color: {}".format(distance, color))
-
+    detected_objects = pixy.get_blocks()
+    
+    print("Distance: {} cm, Detected Objects: {}".format(distance, detected_objects))
 
     # Check if the distance is greater than the threshold
     if distance > DIST_THRESHOLD:
         print("Distance greater than", DIST_THRESHOLD, "cm. Moving forward.")
         move_forward(MOTOR_RUNTIME)  # Move forward for 5 seconds
 
-    # Check if the color sensor detects the specified color
-    if color == SEARCH_COLOR:
-        print("Color {} detected. Turning 180 degrees.".format(SEARCH_COLOR))
+    # Check if the Pixy2 camera detects any objects
+    if detected_objects:
+        print("Objects detected. Turning 180 degrees.")
         turn_robot(TURN_ANGLE)  # Turn the robot 180 degrees
 
         print("Turning up and down 90 degrees.")
         turn_up_down(TURN_ANGLE_UP_DOWN)  # Turn the robot up and down by 90 degrees
-
-    # Wait a bit before the next measurement
-    time.sleep(0.5)
