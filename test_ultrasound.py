@@ -1,36 +1,68 @@
-# Modified Python code for an EV3 Lego robot to test the Ultrasonic Distance Sensor
-# and turn a big motor for 5 seconds if the distance is greater than 40 cm
+from ev3dev2.motor import LargeMotor
+from ev3dev2.sensor import INPUT_1, INPUT_2
+from ev3dev2.sensor.lego import UltrasonicSensor
+from pixy2 import Pixy2
 
-from ev3dev.ev3 import *
-import time
+# Constants
+DIST_THRESHOLD = 40  # Distance threshold in centimeters
+MOTOR_RUNTIME = 5000  # Motor runtime in milliseconds
+MOTOR_SPEED = 500  # Motor speed in degrees per second
+TURN_ANGLE = 180  # Turn angle in degrees
+TURN_ANGLE_UP_DOWN = 90  # Turn angle for up and down motion in degrees
 
 # Connect the Ultrasonic Sensor to any input port, e.g., input port 1
-us = UltrasonicSensor('in1') 
+us = UltrasonicSensor(INPUT_1)
 
-# Connect a large motor to any output port, e.g., output port A
-motor = LargeMotor('outA')
+# Connect large motors to different output ports, e.g., output port A, B, and C
+motor_forward = LargeMotor('outA')
+motor_up_down_1 = LargeMotor('outB')
+motor_up_down_2 = LargeMotor('outC')
 
-# Ensure the sensor and motor are connected
-assert us.connected, "Connect a single ultrasonic sensor to any sensor port"
-assert motor.connected, "Connect a large motor to any motor port"
+# Connect the Pixy2 camera to any input port, e.g., input port 2
+pixy = Pixy2(INPUT_2)
 
-# Configure the sensor for distance measurements in centimeters
-us.mode='US-DIST-CM'
+# Configure the sensors
+us.mode = 'US-DIST-CM'
 
 # Function to measure and return the distance
 def measure_distance():
-    # Measure the distance and return it
-    return us.value()/10  # convert mm to cm
+    return us.distance_centimeters
 
-# Testing the sensor
+# Function to move the robot forward for a specified time
+def move_forward(time_sp):
+    motor_forward.run_timed(time_sp=time_sp, speed_sp=MOTOR_SPEED)
+    motor_forward.wait_until_not_moving()  # Wait until the motor stops
+
+# Function to turn the robot by a specified angle
+def turn_robot(angle):
+    motor_forward.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
+    motor_forward.wait_until_not_moving()  # Wait until the motor stops
+
+# Function to turn the robot up and down by a specified angle for both motors
+def turn_up_down(angle):
+    motor_up_down_1.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
+    motor_up_down_2.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
+    
+    # Wait until both motors stop
+    motor_up_down_1.wait_until_not_moving()
+    motor_up_down_2.wait_until_not_moving()
+
+# Testing the sensors and motors
 while True:
     distance = measure_distance()
-    print("Distance:", distance, "cm")
+    detected_objects = pixy.get_blocks()
 
-    # Check if the distance is greater than 40 cm
-    if distance > 40:
-        print("Distance greater than 40 cm. Turning motor on.")
-        motor.run_timed(time_sp=5000, speed_sp=500)  # Run motor for 5 seconds
+    print("Distance: {} cm, Detected Objects: {}".format(distance, detected_objects))
 
-    # Wait a bit before the next measurement
-    time.sleep(0.5)
+    # Check if the distance is greater than the threshold
+    if distance > DIST_THRESHOLD:
+        print("Distance greater than", DIST_THRESHOLD, "cm. Moving forward.")
+        move_forward(MOTOR_RUNTIME)  # Move forward for 5 seconds
+
+    # Check if the Pixy2 camera detects any objects
+    if detected_objects:
+        print("Objects detected. Turning 180 degrees.")
+        turn_robot(TURN_ANGLE)  # Turn the robot 180 degrees
+
+        print("Turning up and down 90 degrees.")
+        turn_up_down(TURN_ANGLE_UP_DOWN)  # Turn the robot up and down by 90 degrees
