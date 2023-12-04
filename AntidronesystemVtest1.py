@@ -70,7 +70,7 @@ while True:
 
     # Check if the color sensor detects the specified color
     if color == SEARCH_COLOR:
-        print(f"Color {SEARCH_COLOR} detected. Turning 180 degrees.")
+        print("Color {} detected. Turning 180 degrees.".format(SEARCH_COLOR))
         turn_robot(TURN_ANGLE)  # Turn the robot 180 degrees
 
         print("Turning up and down 90 degrees.")
