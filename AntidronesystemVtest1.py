@@ -60,7 +60,8 @@ while True:
     distance = measure_distance()
     color = color_sensor.value()
 
-    print(f"Distance: {distance} cm, Color: {color}")
+    print("Distance: {} cm, Color: {}".format(distance, color))
+
 
     # Check if the distance is greater than the threshold
     if distance > DIST_THRESHOLD:
