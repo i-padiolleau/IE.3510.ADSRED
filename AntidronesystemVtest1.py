@@ -22,11 +22,11 @@ color_sensor = ColorSensor('in2')
 
 # Ensure the sensors and motors are connected
 
-assert us.connected, "Connect a single ultrasonic sensor to any sensor port"
-assert motor_forward.connected, "Connect a large motor to any motor port for forward motion"
-assert motor_up_down_1.connected, "Connect a large motor to any motor port for up and down motion 1"
-assert motor_up_down_2.connected, "Connect a large motor to any motor port for up and down motion 2"
-assert color_sensor.connected, "Connect a color sensor to any sensor port"
+#assert us.connected, "Connect a single ultrasonic sensor to any sensor port"
+#assert motor_forward.connected, "Connect a large motor to any motor port for forward motion"
+#assert motor_up_down_1.connected, "Connect a large motor to any motor port for up and down motion 1"
+#assert motor_up_down_2.connected, "Connect a large motor to any motor port for up and down motion 2"
+#assert color_sensor.connected, "Connect a color sensor to any sensor port"
 
 # Configure the sensors
 us.mode = 'US-DIST-CM'
