@@ -28,7 +28,7 @@ def turn_up_down(angle):
     # Wait until both motors stop
     motor_up_down_1.wait_until_not_moving()
     motor_up_down_2.wait_until_not_moving()
-
+    
 while True:
     detected_objects = pixy2.get_blocks(1, 1)
     print("Detected Objects: {}".format(detected_objects))
