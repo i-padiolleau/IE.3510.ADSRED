@@ -1,6 +1,8 @@
-from ev3dev2.motor import LargeMotor
+from ev3dev2.motor import LargeMotor, OUTPUT_A, OUTPUT_B, SpeedPercent, MoveTank
 from ev3dev2.sensor import INPUT_1, INPUT_2
 from ev3dev2.sensor.lego import UltrasonicSensor
+from ev3dev2.sensor.lego import TouchSensor
+from ev3dev2.led import Leds
 from time import sleep
 from pixycamev3.pixy2 import Pixy2
 
