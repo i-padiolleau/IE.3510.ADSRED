@@ -30,8 +30,11 @@ def turn_up_down(angle):
     motor_up_down_2.wait_until_not_moving()
     
 while True:
+    distance = measure_distance()
+    
     detected_objects = pixy2.get_blocks(1, 1)
     print("Detected Objects: {}".format(detected_objects))
+    print("Distance: {} cm, Detected Objects: {}".format(distance, detected_objects))
 
     # Check if the Pixy2 camera detects any objects
     if detected_objects:
