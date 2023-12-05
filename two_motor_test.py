@@ -2,9 +2,13 @@ from ev3dev2.motor import LargeMotor
 from time import sleep
 from pixycamev3.pixy2 import Pixy2
 
+
 MOTOR_SPEED = 500  # Motor speed in degrees per second
 TURN_ANGLE = 180  # Turn angle in degrees
 TURN_ANGLE_UP_DOWN = 90  # Turn angle for up and down motion in degrees
+
+# Connect the Ultrasonic Sensor to any input port, e.g., input port 1
+us = UltrasonicSensor(INPUT_1)
 
 # Connect large motors to different output ports, e.g., output port A, B, and C
 #motor_forward = LargeMotor('outA')
