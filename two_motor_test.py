@@ -35,8 +35,8 @@ while True:
 
     # Check if the Pixy2 camera detects any objects
     if detected_objects:
-        print("Objects detected. Turning 180 degrees.")
-        turn_robot(TURN_ANGLE)  # Turn the robot 180 degrees
+        #print("Objects detected. Turning 180 degrees.")
+        #turn_robot(TURN_ANGLE)  # Turn the robot 180 degrees
 
         print("Turning up and down 90 degrees.")
         turn_up_down(TURN_ANGLE_UP_DOWN)  # Turn the robot up and down by 90 degrees
