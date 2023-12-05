@@ -7,7 +7,7 @@ TURN_ANGLE = 180  # Turn angle in degrees
 TURN_ANGLE_UP_DOWN = 90  # Turn angle for up and down motion in degrees
 
 # Connect large motors to different output ports, e.g., output port A, B, and C
-motor_forward = LargeMotor('outA')
+#motor_forward = LargeMotor('outA')
 motor_up_down_1 = LargeMotor('outB')
 motor_up_down_2 = LargeMotor('outC')
 
@@ -17,8 +17,8 @@ pixy2.set_lamp(1, 0)
 
 # Function to turn the robot by a specified angle
 def turn_robot(angle):
-    motor_forward.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
-    motor_forward.wait_until_not_moving()  # Wait until the motor stops
+    #motor_forward.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
+    #motor_forward.wait_until_not_moving()  # Wait until the motor stops
 
 # Function to turn the robot up and down by a specified angle for both motors
 def turn_up_down(angle):
