@@ -16,7 +16,7 @@ pixy2 = Pixy2(port=2, i2c_address=0x54)
 pixy2.set_lamp(1, 0)
 
 # Function to turn the robot by a specified angle
-def turn_robot(angle):
+#def turn_robot(angle):
     #motor_forward.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
     #motor_forward.wait_until_not_moving()  # Wait until the motor stops
 
