@@ -7,7 +7,7 @@ from time import sleep
 from pixycamev3.pixy2 import Pixy2
 
 
-MOTOR_SPEED = 40  # Motor speed in degrees per second
+MOTOR_SPEED = 150  # Motor speed in degrees per second
 TURN_ANGLE = 180  # Turn angle in degrees
 TURN_ANGLE_UP_DOWN = 90  # Turn angle for up and down motion in degrees
 
@@ -42,8 +42,8 @@ def turn_up_down(angle):
     motor_up_down_2.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
     
     # Wait until both motors stop
-    motor_up_down_1.wait_while('running')
-    motor_up_down_2.wait_while('running')
+    #motor_up_down_1.wait_while('running')
+    #motor_up_down_2.wait_while('running')
     motor_up_down_1.wait_until_not_moving()
     motor_up_down_2.wait_until_not_moving()
     
