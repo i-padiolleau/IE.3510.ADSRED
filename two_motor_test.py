@@ -37,10 +37,13 @@ def measure_distance():
 
 # Function to turn the robot up and down by a specified angle for both motors
 def turn_up_down(angle):
-    motor_up_down_1.run_target(speed=MOTOR_SPEED, target_angle=angle, then=Stop.HOLD, wait=True)
-    motor_up_down_2.run_target(speed=MOTOR_SPEED, target_angle=angle, then=Stop.HOLD, wait=True)
+
+    motor_up_down_1.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
+    motor_up_down_2.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
     
     # Wait until both motors stop
+    motor_up_down_1.wait_while('running')
+    motor_up_down_2.wait_while('running')
     motor_up_down_1.wait_until_not_moving()
     motor_up_down_2.wait_until_not_moving()
     
