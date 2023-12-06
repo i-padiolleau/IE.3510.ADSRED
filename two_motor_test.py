@@ -7,9 +7,9 @@ from time import sleep
 from pixycamev3.pixy2 import Pixy2
 
 
-MOTOR_SPEED = 500  # Motor speed in degrees per second
+MOTOR_SPEED = 40  # Motor speed in degrees per second
 TURN_ANGLE = 180  # Turn angle in degrees
-TURN_ANGLE_UP_DOWN = 45  # Turn angle for up and down motion in degrees
+TURN_ANGLE_UP_DOWN = 90  # Turn angle for up and down motion in degrees
 
 # Connect the Ultrasonic Sensor to any input port, e.g., input port 1
 us = UltrasonicSensor(INPUT_1)
@@ -37,8 +37,9 @@ def measure_distance():
 
 # Function to turn the robot up and down by a specified angle for both motors
 def turn_up_down(angle):
-    motor_up_down_1.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
-    motor_up_down_2.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)    
+    motor_up_down_1.run_target(speed=MOTOR_SPEED, target_angle=angle, then=Stop.HOLD, wait=True)
+    motor_up_down_2.run_target(speed=MOTOR_SPEED, target_angle=angle, then=Stop.HOLD, wait=True)
+    
     # Wait until both motors stop
     motor_up_down_1.wait_until_not_moving()
     motor_up_down_2.wait_until_not_moving()
