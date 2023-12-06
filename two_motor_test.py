@@ -7,7 +7,7 @@ from time import sleep
 from pixycamev3.pixy2 import Pixy2
 
 
-MOTOR_SPEED = 150  # Motor speed in degrees per second
+MOTOR_SPEED = 250  # Motor speed in degrees per second
 TURN_ANGLE = 180  # Turn angle in degrees
 TURN_ANGLE_UP_DOWN = 90  # Turn angle for up and down motion in degrees
 
