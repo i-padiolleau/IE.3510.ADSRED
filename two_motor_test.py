@@ -1,4 +1,4 @@
-from ev3dev2.motor import LargeMotor, OUTPUT_A, OUTPUT_B, SpeedPercent, MoveTank
+from ev3dev2.motor import LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, SpeedPercent, MoveTank
 from ev3dev2.sensor import INPUT_1, INPUT_2
 from ev3dev2.sensor.lego import UltrasonicSensor
 from ev3dev2.sensor.lego import TouchSensor
@@ -7,7 +7,7 @@ from time import sleep
 from pixycamev3.pixy2 import Pixy2
 
 
-MOTOR_SPEED = 250  # Motor speed in degrees per second
+MOTOR_SPEED = 50  # Motor speed in degrees per second
 TURN_ANGLE = 180  # Turn angle in degrees
 TURN_ANGLE_UP_DOWN = 90  # Turn angle for up and down motion in degrees
 
@@ -15,9 +15,9 @@ TURN_ANGLE_UP_DOWN = 90  # Turn angle for up and down motion in degrees
 us = UltrasonicSensor(INPUT_1)
 
 # Connect large motors to different output ports, e.g., output port A, B, and C
-#motor_forward = LargeMotor('outA')
-motor_up_down_1 = LargeMotor('outB')
-motor_up_down_2 = LargeMotor('outC')
+#motor_forward = LargeMotor(OUTPUT_A)
+motor_up_down_1 = LargeMotor(OUTPUT_B)
+motor_up_down_2 = LargeMotor(OUTPUT_C)
 
 pixy2 = Pixy2(port=2, i2c_address=0x54)
 
@@ -32,14 +32,14 @@ def measure_distance():
 
 # Function to turn the robot by a specified angle
 #def turn_robot(angle):
-    #motor_forward.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
+    #motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
     #motor_forward.wait_until_not_moving()  # Wait until the motor stops
 
 # Function to turn the robot up and down by a specified angle for both motors
 def turn_up_down(angle):
 
-    motor_up_down_1.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
-    motor_up_down_2.run_to_rel_pos(position_sp=angle, speed_sp=MOTOR_SPEED)
+    motor_up_down_1.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
+    motor_up_down_2.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
     
     # Wait until both motors stop
     #motor_up_down_1.wait_while('running')
