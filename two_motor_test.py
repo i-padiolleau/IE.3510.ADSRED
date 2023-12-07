@@ -40,7 +40,7 @@ def turn_up_down(angle):
 
     motor_up_down_1.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
     motor_up_down_2.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
-    
+    sleep(1)
     # Wait until both motors stop
     #motor_up_down_1.wait_while('running')
     #motor_up_down_2.wait_while('running')
@@ -62,4 +62,4 @@ while True:
         print("Turning up and down 90 degrees.")
         turn_up_down(TURN_ANGLE_UP_DOWN)  # Turn the robot up and down by 90 degrees
 
-    sleep(3)  # Sleep for 3 second to avoid excessive loop frequency
+    sleep(1)  # Sleep for 1 second to avoid excessive loop frequency
