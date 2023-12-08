@@ -62,5 +62,4 @@ while True:
 
         print("Turning up and down 90 degrees.")
         turn_up_down(TURN_ANGLE_UP_DOWN)  # Turn the robot up and down by 90 degrees
-
-    sleep(1)  # Sleep for 1 second to avoid excessive loop frequency
+        sleep(1)  # Sleep for 1 second to avoid excessive loop frequency
