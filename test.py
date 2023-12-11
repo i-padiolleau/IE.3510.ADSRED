@@ -76,8 +76,13 @@ while True :
         if compute_dist :
             if compt_dist >= 10 : 
                 average_w, average_h = map(lambda z: sum(z) / len(bb_box), zip(*bb_box))
-                print(average_w, average_h)
-                break
+                print(average_w, average_h)  
+                distance_on_x = (100*316) / average_w
+                distance_on_y = (100*208) / average_h
+                print("distance with x : {}mm".format(distance_on_x))
+                print("distance with y : {}mm".format(distance_on_y))
+                compute_dist = False  
+                Align = True            
             else : 
                 bb_box.append([w,h])
                 compt_dist += 1 
