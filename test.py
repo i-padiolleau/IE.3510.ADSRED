@@ -13,8 +13,7 @@ from pixycamev3.pixy2 import Pixy2
 spkr = Sound()
 pixy2 = Pixy2(port=2, i2c_address=0x54)
 motor_forward = LargeMotor(OUTPUT_A)
-motor_tilt1 = LargeMotor(OUTPUT_B)
-motor_tilt2 = LargeMotor(OUTPUT_C)
+motor_tilt = MoveTank(OUTPUT_B, OUTPUT_C)
 
 pixy2.set_lamp(1, 0)
 sleep(0.5)
@@ -50,18 +49,16 @@ while True :
             comptx += 1
         if y < 94 : 
             angle = 20 - (x/104 * 20)
-            motor_title1.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
-            motor_forward.wait_until_not_moving()
+            motor_titl.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
+            motor_tilt.wait_until_not_moving()
         elif x > 114 :
             angle =  -((x-104)/104 * 20) 
-            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
-            motor_forward.wait_until_not_moving()        
+            motor_tilt.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
+            motor_tilt.wait_until_not_moving()        
         else :
-            if compt == 3 :
-                spkr.speak("Ready to fire") 
-                pixy2.set_lamp(1, 0)
-                sleep(0.5)
-                pixy2.set_lamp(0, 0)
-            else : 
-                compt += 1 
+            compty += 1 
+
+        if comptx >= 3 and compty >= 3 : 
+            spkr.speak("Ready to fire") 
+    
     sleep(1)
