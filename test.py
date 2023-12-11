@@ -26,39 +26,54 @@ voice = True
 
 comptx = 0
 compty = 0
+compt_dist = 0
+compute_dist = False
+bb_box = []
 while True :
     nbr , target = pixy2.get_blocks(3,1)
-    if nbr == 1 :
+    if nbr == 1 : 
         if voice : 
             spkr.speak("target detected") 
             voice = False
+            Align = True
         x = target[0].x_center
         y = target[0].y_center
         w = target[0].width
         h = target[0].height
         print(x, y , w, h)
-        if x < 148 : 
-            angle_x = 30 - (x/158 * 30)
-            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
-            motor_forward.wait_until_not_moving()
-        elif x > 168 :
-            angle_x =  -((x-158)/158 * 30) 
-            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
-            motor_forward.wait_until_not_moving()        
-        else : 
-            comptx += 1
-        if y < 94 : 
-            angle_y = 20 - (y/104 * 20)
-            motor_tilt.on_for_degrees(40,40,angle_y)
-            motor_tilt.wait_until_not_moving()
-        elif y > 114 :
-            angle_y =  -((y-104)/104 * 20) 
-            motor_tilt.on_for_degrees(40,40,angle_y)
-            motor_tilt.wait_until_not_moving()        
-        else :
-            compty += 1
-        if comptx >= 3 and compty >= 3 : 
-            print("ready")
-            # spkr.speak("Ready to fire") 
-    
+        if Align :
+            if x < 148 : 
+                angle_x = 30 - (x/158 * 30)
+                motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
+                motor_forward.wait_until_not_moving()
+            elif x > 168 :
+                angle_x =  -((x-158)/158 * 30) 
+                motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
+                motor_forward.wait_until_not_moving()        
+            else : 
+                comptx += 1
+            if y < 94 : 
+                angle_y = 20 - (y/104 * 20)
+                motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,angle_y)
+                motor_tilt.wait_until_not_moving()
+            elif y > 114 :
+                angle_y =  -((y-104)/104 * 20) 
+                motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,angle_y)
+                motor_tilt.wait_until_not_moving()        
+            else :
+                compty += 1
+            if comptx >= 3 and compty >= 3 : 
+                print("ready")
+                Align = False
+                compt_dist = True
+                spkr.speak("Ready to fire") 
+
+
+        if compute_dist :
+            if compt_dist >= 10 : 
+                average_w, average_h = map(lambda z: sum(z) / len(bb_box), zip(*bb_box))
+                print(average_w, average_h)
+                break
+            else : 
+                bb_box.append([w,h])
     sleep(0.2)
