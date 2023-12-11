@@ -24,11 +24,12 @@ MOTOR_SPEED = 50
 voice = True
 
 while True :
-    nbr , target = pixy2.get_blocks(sigmap=3,1)
+    nbr , target = pixy2.get_blocks(3,1)
     if nbr == 1 :
         if voice : 
             spkr.speak("target detected") 
             voice = False
+        print(target[0].sig)
         x = target[0].x_center
         y = target[0].y_center
         w = target[0].width
