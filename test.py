@@ -24,6 +24,7 @@ MOTOR_SPEED = 10
 
 voice = True
 
+compt = 0
 comptx = 0
 compty = 0
 compt_dist = 0
@@ -51,7 +52,7 @@ while True :
                 motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
                 motor_forward.wait_until_not_moving()        
             else : 
-                comptx += 1
+                pos_on_x = True
             if y < 94 : 
                 angle_y = 20 - (y/104 * 20)
                 motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,angle_y)
@@ -61,8 +62,11 @@ while True :
                 motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,angle_y)
                 motor_tilt.wait_until_not_moving()        
             else :
-                compty += 1
-            if comptx >= 3 and compty >= 3 : 
+                pos_on_y = True
+            if pos_on_x and pos_on_y : 
+                compt += 1 
+                print("presque")
+            if compt >= 5 : 
                 print("ready")
                 Align = False
                 compute_dist = True
