@@ -39,6 +39,8 @@ integral_x = 0
 prev_error_y = 0
 integral_y = 0
 
+# ...
+
 while True:
     nbr, target = pixy2.get_blocks(3, 1)
 
@@ -68,9 +70,13 @@ while True:
             pid_output_x = kp * error_x + ki * integral_x + kd * (error_x - prev_error_x)
             pid_output_y = kp * error_y + ki * integral_y + kd * (error_y - prev_error_y)
 
-            # Update motor positions based on PID outputs
-            motor_forward.on(SpeedPercent(MOTOR_SPEED - pid_output_x), brake=False)
-            motor_tilt.on(SpeedPercent(MOTOR_SPEED - pid_output_y), brake=False)
+            # Calculate adjusted speed percentages, ensuring they are within the valid range
+            speed_percent_x = max(min(MOTOR_SPEED - pid_output_x, 100), -100)
+            speed_percent_y = max(min(MOTOR_SPEED - pid_output_y, 100), -100)
+
+            # Update motor positions based on adjusted PID outputs
+            motor_forward.on(SpeedPercent(speed_percent_x), brake=False)
+            motor_tilt.on(SpeedPercent(speed_percent_y), brake=False)
 
             # Save current errors for the next iteration
             prev_error_x = error_x
