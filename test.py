@@ -29,28 +29,25 @@ while True :
         if voice : 
             spkr.speak("target detected") 
             voice = False
-        print(target[0].sig)
         x = target[0].x_center
         y = target[0].y_center
         w = target[0].width
         h = target[0].height
+        print(x, y , w, h)
         if x < 148 : 
             angle = 30 - (x/158 * 30)
-            print("----------------")
-            print(angle)
             motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle* 2.5)
             motor_forward.wait_until_not_moving()
         if x > 168 :
             angle =  -((x-158)/158 * 30) 
-            print("----------------")
-            print(angle)
             motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle* 2.5)
             motor_forward.wait_until_not_moving()
         else : 
-            spkr.speak("Ready to fire") 
-            pixy2.set_lamp(1, 0)
-            sleep(0.5)
-            pixy2.set_lamp(0, 0)
-        print(x, y , w, h)
-
+            if compt == 3 :
+                spkr.speak("Ready to fire") 
+                pixy2.set_lamp(1, 0)
+                sleep(0.5)
+                pixy2.set_lamp(0, 0)
+            else : 
+                compt += 1 
     sleep(1)
