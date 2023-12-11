@@ -23,6 +23,8 @@ MOTOR_SPEED = 50
 
 voice = True
 
+comptx = 0
+compty = 0
 while True :
     nbr , target = pixy2.get_blocks(3,1)
     if nbr == 1 :
@@ -38,11 +40,13 @@ while True :
             angle = 30 - (x/158 * 30)
             motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle* 2.5)
             motor_forward.wait_until_not_moving()
-        if x > 168 :
+        elif x > 168 :
             angle =  -((x-158)/158 * 30) 
             motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle* 2.5)
             motor_forward.wait_until_not_moving()
+        
         else : 
+            comptx += 1
             if compt == 3 :
                 spkr.speak("Ready to fire") 
                 pixy2.set_lamp(1, 0)
