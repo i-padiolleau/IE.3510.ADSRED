@@ -38,22 +38,22 @@ while True :
         h = target[0].height
         print(x, y , w, h)
         if x < 148 : 
-            angle = 30 - (x/158 * 30)
-            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle* 2.5)
+            angle_x = 30 - (x/158 * 30)
+            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
             motor_forward.wait_until_not_moving()
         elif x > 168 :
-            angle =  -((x-158)/158 * 30) 
-            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle* 2.5)
+            angle_x =  -((x-158)/158 * 30) 
+            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
             motor_forward.wait_until_not_moving()        
         else : 
             comptx += 1
         if y < 94 : 
-            angle = 20 - (x/104 * 20)
-            motor_tilt.on_for_degrees(40,40,angle)
+            angle_y = 20 - (x/104 * 20)
+            motor_tilt.on_for_degrees(40,40,angle_y)
             motor_tilt.wait_until_not_moving()
         elif x > 114 :
-            angle =  -((x-104)/104 * 20) 
-            motor_tilt.on_for_degrees(40,40,angle)
+            angle_y =  -((x-104)/104 * 20) 
+            motor_tilt.on_for_degrees(40,40,angle_y)
             motor_tilt.wait_until_not_moving()        
         else :
             compty += 1 
