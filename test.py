@@ -65,7 +65,7 @@ while True :
             if comptx >= 3 and compty >= 3 : 
                 print("ready")
                 Align = False
-                compt_dist = True
+                compute_dist = True
                 spkr.speak("Ready to fire") 
 
 
