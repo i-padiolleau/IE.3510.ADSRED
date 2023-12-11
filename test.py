@@ -43,10 +43,18 @@ while True :
         elif x > 168 :
             angle =  -((x-158)/158 * 30) 
             motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle* 2.5)
-            motor_forward.wait_until_not_moving()
-        
+            motor_forward.wait_until_not_moving()        
         else : 
             comptx += 1
+        if y < 94 : 
+            angle = 20 - (x/104 * 20)
+            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
+            motor_forward.wait_until_not_moving()
+        elif x > 114 :
+            angle =  -((x-104)/104 * 20) 
+            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
+            motor_forward.wait_until_not_moving()        
+        else :
             if compt == 3 :
                 spkr.speak("Ready to fire") 
                 pixy2.set_lamp(1, 0)
