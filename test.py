@@ -45,6 +45,11 @@ while True :
             print(angle)
             motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle* 2.5)
             motor_forward.wait_until_not_moving()
+        else : 
+            spkr.speak("Ready to fire") 
+            pixy2.set_lamp(1, 0)
+            sleep(0.5)
+            pixy2.set_lamp(0, 0)
         print(x, y , w, h)
 
     sleep(1)
