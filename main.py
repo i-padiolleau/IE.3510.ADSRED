@@ -27,7 +27,7 @@ class Robot:
         self.compty = 0
         self.compt_dist = 0
 
-    def rotate_cam(self): 
+    def _rotate_cam(self): 
         print(self.motor_forward.position)
         self.motor_forward.on_for_degrees(speed=self.MOTOR_SPEED, degrees=16)
         self.motor_forward.wait_until_not_moving()
@@ -48,7 +48,7 @@ class Robot:
                 self._align_robot(x, y, w, h)
                 self._compute_distance(w, h)
             else : 
-                self.rotate_cam()
+                self._rotate_cam()
             sleep(0.2)
 
     def _align_robot(self, x, y, w, h):
