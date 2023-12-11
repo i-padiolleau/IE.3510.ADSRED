@@ -12,9 +12,25 @@ from pixycamev3.pixy2 import Pixy2
 pixy2 = Pixy2(port=2, i2c_address=0x54)
 
 pixy2.set_lamp(1, 0)
+sleep(0.5)
+pixy2.set_lamp(0, 0)
+
+resolution = pixy2.get_resolution()
+WIDTH = resolution.width
+HEIGHT = resolution.height
+
+print('Frame width:  ', resolution.width)
+print('Frame height: ', resolution.height)
 
 while True :
-    a = pixy2.get_blocks(1,1)
-    print(a)
+    nbr , target = pixy2.get_blocks(1,1)
+    if nbr == 1 : 
+        sig = blocks[0].sig
+        x = blocks[0].x_center
+        y = blocks[0].y_center
+        w = blocks[0].width
+        h = blocks[0].height
 
-    sleep(1000)
+        print(sig, x, y , w, h)
+
+    sleep(10)
