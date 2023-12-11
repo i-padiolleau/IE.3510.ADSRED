@@ -34,13 +34,13 @@ while True :
         w = target[0].width
         h = target[0].height
         if x < 148 : 
-            angle = (x/158 * 30)
+            angle = 30 - (x/158 * 30)
             print("----------------")
             print(angle)
             motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
             motor_forward.wait_until_not_moving()
         if x > 168 :
-            angle = (x/158 * 30 * -1)
+            angle = 30 - (x/158 * 30 * -1)
             print("----------------")
             print(angle)
             motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
