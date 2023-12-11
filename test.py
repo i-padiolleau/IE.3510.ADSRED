@@ -30,6 +30,8 @@ compty = 0
 compt_dist = 0
 compute_dist = False
 bb_box = []
+pos_on_x = False
+pos_on_y = False
 while True :
     nbr , target = pixy2.get_blocks(3,1)
     if nbr == 1 : 
