@@ -37,13 +37,13 @@ while True :
             angle = 30 - (x/158 * 30)
             print("----------------")
             print(angle)
-            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
+            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle* 2.5)
             motor_forward.wait_until_not_moving()
         if x > 168 :
             angle = 30 - (x/158 * 30 * -1)
             print("----------------")
             print(angle)
-            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
+            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle* 2.5)
             motor_forward.wait_until_not_moving()
         print(x, y , w, h)
 
