@@ -23,6 +23,11 @@ MOTOR_SPEED = 50
 
 voice = True
 
+angle = -90
+
+motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle* 2.5)
+motor_forward.wait_until_not_moving()
+
 while True :
     nbr , target = pixy2.get_blocks(1,1)
     if nbr == 1 :
