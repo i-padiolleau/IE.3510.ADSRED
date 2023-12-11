@@ -11,7 +11,7 @@ class Robot:
         self.spkr = Sound()
         self.pixy2 = Pixy2(port=2, i2c_address=0x54)
         self.motor_forward = LargeMotor(OUTPUT_A)
-        self.motor_tilt = MoveTank(OUTPUT_B, OUTPUT_C)
+        self.motor_tilt = MoveTank(OUTPUT_D, OUTPUT_C)
         self.pixy2.set_lamp(1, 0)
         sleep(0.5)
         self.pixy2.set_lamp(0, 0)
