@@ -19,25 +19,32 @@ sleep(0.5)
 pixy2.set_lamp(0, 0)
 
 resolution = pixy2.get_resolution()
-WIDTH = resolution.width
-HEIGHT = resolution.height
 MOTOR_SPEED = 50
 
-print('Frame width:  ', resolution.width)
-print('Frame height: ', resolution.height)
+voice = True
 
 while True :
     nbr , target = pixy2.get_blocks(1,1)
-    if nbr == 1 : 
-        spkr.speak("target detected")
+    if nbr == 1 :
+        if voice : 
+            spkr.speak("target detected") 
+            voice = False
         x = target[0].x_center
         y = target[0].y_center
         w = target[0].width
         h = target[0].height
-        if x < WIDTH/2 : 
-            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=10)
+        if x < 148 : 
+            angle = (x/158 * 30)
+            print("----------------")
+            print(angle)
+            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
             motor_forward.wait_until_not_moving()
-        
-        print( x, y , w, h)
+        if x > 168 :
+            angle = (x/158 * 30 * -1)
+            print("----------------")
+            print(angle)
+            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle)
+            motor_forward.wait_until_not_moving()
+        print(x, y , w, h)
 
     sleep(1)
