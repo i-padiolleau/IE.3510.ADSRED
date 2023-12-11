@@ -10,5 +10,6 @@ motor_forward = LargeMotor(OUTPUT_A)
 motor_tilt = MoveTank(OUTPUT_B, OUTPUT_C)
 
 
-motor_forward.reset()
+print(motor_forward.position)
+print(motor_forward.position())
 motor_tilt.reset()
