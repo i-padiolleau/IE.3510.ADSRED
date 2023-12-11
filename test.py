@@ -56,8 +56,7 @@ while True :
             motor_tilt.on_for_degrees(40,40,angle_y)
             motor_tilt.wait_until_not_moving()        
         else :
-            compty += 1 
-        print(angle_y)
+            compty += 1
         if comptx >= 3 and compty >= 3 : 
             spkr.speak("Ready to fire") 
     
