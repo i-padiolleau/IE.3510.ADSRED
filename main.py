@@ -29,7 +29,6 @@ class Robot:
 
     def rotate_cam(self): 
         print(self.motor_forward.position)
-        print(self.motor_tilt.position)
         self.motor_forward.on_for_degrees(speed=self.MOTOR_SPEED, degrees=16)
         self.motor_forward.wait_until_not_moving()
 
