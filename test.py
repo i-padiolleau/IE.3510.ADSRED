@@ -25,12 +25,10 @@ print('Frame height: ', resolution.height)
 while True :
     nbr , target = pixy2.get_blocks(1,1)
     if nbr == 1 : 
-        sig = blocks[0].sig
-        x = blocks[0].x_center
-        y = blocks[0].y_center
-        w = blocks[0].width
-        h = blocks[0].height
-
+        sig = target[0].sig
+        x = target[0].x_center
+        y = target[0].y_center
+        w = target[0].width
+        h = [0].height
         print(sig, x, y , w, h)
-
-    sleep(10)
+    sleep(1)
