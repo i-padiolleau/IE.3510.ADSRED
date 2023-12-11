@@ -33,8 +33,11 @@ bb_box = []
 Align = False
 
 # Initialize PID variables
-prev_error = 0
-integral = 0
+prev_error_x = 0
+integral_x = 0
+
+prev_error_y = 0
+integral_y = 0
 
 while True:
     nbr, target = pixy2.get_blocks(3, 1)
@@ -55,19 +58,15 @@ while True:
             error_x = x - 158  # Assume the target is centered at x-coordinate 158
             error_y = y - 104  # Assume the target is centered at y-coordinate 104
 
-            # Update integral and derivative terms for x-axis
-            integral_x = integral + error_x
-            derivative_x = error_x - prev_error
+            # Update integral terms for x-axis
+            integral_x = integral_x + error_x
 
-            # Update integral and derivative terms for y-axis
-            integral_y = integral + error_y
-            derivative_y = error_y - prev_error
+            # Update integral terms for y-axis
+            integral_y = integral_y + error_y
 
-            # Calculate PID output for x-axis
-            pid_output_x = kp * error_x + ki * integral_x + kd * derivative_x
-
-            # Calculate PID output for y-axis
-            pid_output_y = kp * error_y + ki * integral_y + kd * derivative_y
+            # Calculate PID outputs
+            pid_output_x = kp * error_x + ki * integral_x + kd * (error_x - prev_error_x)
+            pid_output_y = kp * error_y + ki * integral_y + kd * (error_y - prev_error_y)
 
             # Update motor positions based on PID outputs
             motor_forward.on(SpeedPercent(MOTOR_SPEED - pid_output_x), brake=False)
