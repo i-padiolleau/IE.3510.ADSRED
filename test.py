@@ -20,7 +20,7 @@ sleep(0.5)
 pixy2.set_lamp(0, 0)
 
 resolution = pixy2.get_resolution()
-MOTOR_SPEED = 50
+MOTOR_SPEED = 10
 
 voice = True
 
@@ -59,6 +59,7 @@ while True :
             compty += 1 
 
         if comptx >= 3 and compty >= 3 : 
-            spkr.speak("Ready to fire") 
+            print("ready")
+            # spkr.speak("Ready to fire") 
     
-    sleep(1)
+    sleep(0.2)
