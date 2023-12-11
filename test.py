@@ -76,4 +76,5 @@ while True :
                 break
             else : 
                 bb_box.append([w,h])
+                compt_dist += 1 
     sleep(0.2)
