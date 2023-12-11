@@ -48,11 +48,11 @@ while True :
         else : 
             comptx += 1
         if y < 94 : 
-            angle_y = 20 - (x/104 * 20)
+            angle_y = 20 - (y/104 * 20)
             motor_tilt.on_for_degrees(40,40,angle_y)
             motor_tilt.wait_until_not_moving()
-        elif x > 114 :
-            angle_y =  -((x-104)/104 * 20) 
+        elif y > 114 :
+            angle_y =  -((y-104)/104 * 20) 
             motor_tilt.on_for_degrees(40,40,angle_y)
             motor_tilt.wait_until_not_moving()        
         else :
