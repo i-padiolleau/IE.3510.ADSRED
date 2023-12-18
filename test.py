@@ -137,7 +137,6 @@ while True :
 
     else : 
         move = sequence[i]
-        print(i, move)
         if move == 1 : 
             motor_forward.on_for_degrees(speed=15, degrees=30 * 2.5)
         elif move == -1 : 
@@ -148,7 +147,6 @@ while True :
             motor_tilt.on_for_degrees(15,-27)
         i += 1 
         if i ==len(sequence) : 
-            print(motor_forward.position , motor_tilt.position)
 
             i = 0 
 
