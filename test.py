@@ -47,7 +47,7 @@ pos_on_y = False
 detect = False
 compt_loss = 0 
 shoot = False
-test = input("start_scanning press enter")
+test = input("start_scanning press enter :")
 while True :
     nbr , target = pixy2.get_blocks(1,1)
     pos_on_x = False
@@ -62,7 +62,6 @@ while True :
         y = target[0].y_center
         w = target[0].width
         h = target[0].height
-        print(x, y , w, h)
         if Align :
             if x < 148 : 
                 angle_x = 30 - (x/158 * 30)
@@ -115,6 +114,7 @@ while True :
 
         if shoot : 
             spkr.speak("fire in the hole !")
+            motor_tilt.on_for_degrees(10,20)
             motor_shoot.on_for_degrees(speed=20, degrees=-310)
             motor_shoot.wait_until_not_moving()
 
@@ -126,8 +126,7 @@ while True :
             voice = True
 
     elif detect :
-        print(compt_loss)
-        if compt_loss >= 3 : 
+        if compt_loss >= 5 : 
             detect = False
             reboot(motor_forward_starting_position , motor_tilt_starting_position,motor_forward, motor_tilt)
             i = 0 
