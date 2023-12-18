@@ -30,11 +30,12 @@ class Robot() :
 
         while True : 
             nbr, target = self.pixy2.get_blocks(1,1)
+            print("test")
 
             if target : 
                 self.motor_forward.stop()
 
 
-test = Robot(OUTPUT_A, OUTPUT_D, OUTPUT_C)
+test = Robot(OUTPUT_A, OUTPUT_C, OUTPUT_D)
 test.scan_sequence()
 test.detect()
