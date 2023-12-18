@@ -38,7 +38,7 @@ pos_on_x = False
 pos_on_y = False
 test = input("start_scanning press enter")
 while True :
-    nbr , target = pixy2.get_blocks(3,1)
+    nbr , target = pixy2.get_blocks(1,1)
     if nbr >= 1 : 
         if voice : 
             spkr.speak("target detected") 
