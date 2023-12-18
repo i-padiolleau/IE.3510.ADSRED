@@ -126,6 +126,7 @@ while True :
             voice = True
 
     elif detect :
+        print(compt_loss)
         if compt_loss >= 3 : 
             detect = False
             reboot(motor_forward_starting_position , motor_tilt_starting_position,motor_forward, motor_tilt)
