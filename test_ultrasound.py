@@ -6,9 +6,9 @@ from ev3dev2.sensor.lego import TouchSensor
 from ev3dev2.led import Leds
 from ev3dev2.sound import Sound
 
-motor_forward = MediumMotor(OUTPUT_A)
+motor_forward = LargeMotor(OUTPUT_A)
 
-motor_forward.on_for_degrees(speed=20, degrees=-310)
+motor_forward.on_for_degrees(speed=20, degrees=180)
 motor_forward.wait_until_not_moving()
 
 motor_forward.on_for_degrees(speed=20, degrees=310)
