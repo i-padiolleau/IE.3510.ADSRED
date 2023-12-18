@@ -15,7 +15,7 @@ pixy2 = Pixy2(port=2, i2c_address=0x54)
 motor_forward = LargeMotor(OUTPUT_A)
 starting_A = motor_forward.position
 print(starting_A)
-motor_tilt = MoveTank(OUTPUT_B, OUTPUT_C)
+motor_tilt = MoveTank(OUTPUT_D, OUTPUT_C)
 
 pixy2.set_lamp(1, 0)
 sleep(0.5)
