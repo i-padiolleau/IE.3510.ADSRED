@@ -1,3 +1,4 @@
+from threading import Thread
 from time import sleep
 from ev3dev2.motor import LargeMotor,MediumMotor,  OUTPUT_A, OUTPUT_D, OUTPUT_C, SpeedPercent, MoveTank
 from ev3dev2.sensor import INPUT_1
@@ -40,18 +41,11 @@ class Robot() :
 
     def detect(self) :  
         nbr, target = self.pixy2.get_blocks(1,1)
-    def detect(self) : 
-
-        while True : 
-            nbr, target = self.pixy2.get_blocks(1,1)
-            print("test")
 
         if target >= 1 : 
             self.motor_forward.stop()
             self.motor_tilt.stop()
 
-
-test = Robot(OUTPUT_A, OUTPUT_D, OUTPUT_C)
 
 def main():
 
@@ -63,6 +57,3 @@ def main():
 
 if __name__ == "__main__" :
     main()
-test = Robot(OUTPUT_A, OUTPUT_C, OUTPUT_D)
-test.scan_sequence()
-test.detect()
