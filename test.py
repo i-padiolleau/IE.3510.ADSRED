@@ -13,8 +13,6 @@ from pixycamev3.pixy2 import Pixy2
 spkr = Sound()
 pixy2 = Pixy2(port=2, i2c_address=0x54)
 motor_forward = LargeMotor(OUTPUT_A)
-starting_A = motor_forward.position
-print(starting_A)
 motor_tilt = MoveTank(OUTPUT_D, OUTPUT_C)
 
 pixy2.set_lamp(1, 0)
@@ -26,6 +24,9 @@ MOTOR_SPEED = 10
 
 voice = True
 
+scan_on_x = 1
+scan_on_y = 0
+go_right = True
 compt = 0
 comptx = 0
 compty = 0
@@ -91,4 +92,24 @@ while True :
             else : 
                 bb_box.append([w,h])
                 compt_dist += 1 
+
+    else : 
+        if scan_on_x < 4 and scan_on_x > 0: 
+            if go_right :
+                motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=30 * 2.5)
+                scan_on_x += 1
+            else : 
+                motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=-30 * 2.5)
+                scan_on_x -= 1
+        elif scan_on_x == 4 :
+            motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,27)
+            scan_on_y += 1
+            go_right = not go_right
+            
+        elif scan_on_x == 0 : 
+            motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,27)
+            scan_on_y += 1
+            go_right = not go_right
+        
+
     sleep(0.2)
