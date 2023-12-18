@@ -99,7 +99,7 @@ while True :
 
 
         if compute_dist :
-            if compt_dist >= 5 : 
+            if compt_dist >= 15 : 
                 average_w, average_h = map(lambda z: sum(z) / len(bb_box), zip(*bb_box))
                 print(average_w, average_h)  
                 distance_on_x = (125*316) / average_w
