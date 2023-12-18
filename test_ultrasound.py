@@ -10,7 +10,12 @@ motor_forward = LargeMotor(OUTPUT_A)
 
 print(motor_forward.position)
 
-motor_forward.on_for_degrees(speed=20, degrees=180)
+motor_forward.on_for_degrees(speed=10, degrees=180)
+motor_forward.wait_until_not_moving()
+
+print(motor_forward.position)
+
+motor_forward.on_for_degrees(speed=10, degrees=-90)
 motor_forward.wait_until_not_moving()
 
 print(motor_forward.position)
