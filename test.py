@@ -63,11 +63,11 @@ while True :
                 pos_on_x = True
             if y < 94 : 
                 angle_y = 20 - (y/104 * 20)
-                motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,angle_y)
+                motor_tilt.on_for_degrees(MOTOR_SPEED,angle_y)
                 motor_tilt.wait_until_not_moving()
             elif y > 114 :
                 angle_y =  -((y-104)/104 * 20) 
-                motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,angle_y)
+                motor_tilt.on_for_degrees(MOTOR_SPEED,angle_y)
                 motor_tilt.wait_until_not_moving()        
             else :
                 pos_on_y = True
@@ -103,9 +103,9 @@ while True :
         elif move == -1 : 
             motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=-30 * 2.5)
         elif move == 2 : 
-            motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,27)
+            motor_tilt.on_for_degrees(MOTOR_SPEED,27)
         elif move == -2 : 
-            motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,-27)
+            motor_tilt.on_for_degrees(MOTOR_SPEED,-27)
         i += 1 
         if i ==28 : 
             print(motor_forward.position , motor_tilt.position)
