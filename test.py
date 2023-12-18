@@ -94,20 +94,21 @@ while True :
                 compt_dist += 1 
 
     else : 
+        print(scan_on_x, scan_on_y, go_right)
         if scan_on_x < 4 and scan_on_x > 0: 
             if go_right :
-                motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=30 * 2.5)
+                # motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=30 * 2.5)
                 scan_on_x += 1
             else : 
-                motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=-30 * 2.5)
+                # motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=-30 * 2.5)
                 scan_on_x -= 1
         elif scan_on_x == 4 :
-            motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,27)
+            # motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,27)
             scan_on_y += 1
             go_right = not go_right
-            
+
         elif scan_on_x == 0 : 
-            motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,27)
+            # motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,27)
             scan_on_y += 1
             go_right = not go_right
         
