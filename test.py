@@ -2,7 +2,7 @@
 
 from time import sleep
 
-from ev3dev2.motor import LargeMotor, OUTPUT_A, OUTPUT_D, OUTPUT_C, SpeedPercent, MoveTank
+from ev3dev2.motor import MediumMotor , LargeMotor, OUTPUT_A, OUTPUT_D, OUTPUT_C, SpeedPercent, MoveTank
 from ev3dev2.sensor import INPUT_1
 from ev3dev2.sensor.lego import TouchSensor
 from ev3dev2.led import Leds
@@ -14,6 +14,7 @@ spkr = Sound()
 pixy2 = Pixy2(port=2, i2c_address=0x54)
 motor_forward = LargeMotor(OUTPUT_A)
 motor_tilt = LargeMotor( OUTPUT_C)
+motor_shoot = MediumMotor(OUTPUT_D)
 
 print(motor_forward.position , motor_tilt.position)
 
@@ -113,6 +114,11 @@ while True :
 
         if shoot : 
             spkr.speak("fire in the hole !")
+            motor_shoot.on_for_degrees(speed=20, degrees=-310)
+            motor_shoot.wait_until_not_moving()
+
+            motor_shoot.on_for_degrees(speed=20, degrees=310)
+            motor_shoot.wait_until_not_moving()
             reboot(motor_forward_starting_position , motor_tilt_starting_position,motor_forward, motor_tilt)
             i = 0 
             shoot = False
