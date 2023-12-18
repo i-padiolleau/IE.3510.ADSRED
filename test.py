@@ -94,6 +94,7 @@ while True :
 
     else : 
         move = sequence[i]
+        print(i, move)
         if move == 1 : 
             motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=30 * 2.5)
         elif move == -1 : 
