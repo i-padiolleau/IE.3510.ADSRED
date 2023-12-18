@@ -49,7 +49,7 @@ class Robot() :
 
 def main():
 
-    robot = Robot(OUTPUT_A, OUTPUT_D, OUTPUT_C)
+    robot = Robot(OUTPUT_A, OUTPUT_C, OUTPUT_D)
     t = Thread(target=robot.scan_sequence)
     t.start()
     while True:
