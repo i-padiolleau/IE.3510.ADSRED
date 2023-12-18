@@ -128,6 +128,7 @@ while True :
     elif detect :
         if compt_loss >= 5 : 
             detect = False
+            print("target lose")
             reboot(motor_forward_starting_position , motor_tilt_starting_position,motor_forward, motor_tilt)
             i = 0 
             compt_loss = 0
