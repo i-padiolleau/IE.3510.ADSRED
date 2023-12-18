@@ -27,7 +27,7 @@ MOTOR_SPEED = 10
 voice = True
 
 i = 0 
-sequence=[1,1,1,1,2,-1,-1,-1,-1,2,1,1,1,1,-1,-1,-1,-1,-2,1,1,1,1,-2,-1,-1,-1,-1]
+sequence=[-1,-1,-1,-1,1,1,1,1,1,1,1,1,2,-1,-1,-1,-1,-1,-1,-1,-1,2,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,-2,1,1,1,1,1,1,1,1,-2,-1,-1,-1,-1]
 compt = 0
 comptx = 0
 compty = 0
@@ -109,7 +109,7 @@ while True :
         elif move == -2 : 
             motor_tilt.on_for_degrees(MOTOR_SPEED,-27)
         i += 1 
-        if i ==28 : 
+        if i ==len(sequence) : 
             print(motor_forward.position , motor_tilt.position)
 
             i = 0 
