@@ -39,7 +39,6 @@ pos_on_y = False
 test = input("start_scanning press enter")
 while True :
     nbr , target = pixy2.get_blocks(3,1)
-    nbr = 0
     if nbr >= 1 : 
         if voice : 
             spkr.speak("target detected") 
@@ -85,11 +84,11 @@ while True :
 
 
         if compute_dist :
-            if compt_dist >= 10 : 
+            if compt_dist >= 5 : 
                 average_w, average_h = map(lambda z: sum(z) / len(bb_box), zip(*bb_box))
                 print(average_w, average_h)  
-                distance_on_x = (100*316) / average_w
-                distance_on_y = (100*208) / average_h
+                distance_on_x = (125*316) / average_w
+                distance_on_y = (105*208) / average_h
                 print("distance with x : {}mm".format(distance_on_x))
                 print("distance with y : {}mm".format(distance_on_y))
                 compute_dist = False  
