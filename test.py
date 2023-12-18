@@ -13,7 +13,7 @@ from pixycamev3.pixy2 import Pixy2
 spkr = Sound()
 pixy2 = Pixy2(port=2, i2c_address=0x54)
 motor_forward = LargeMotor(OUTPUT_A)
-motor_tilt = MoveTank(OUTPUT_D, OUTPUT_C)
+motor_tilt = LargeMotor( OUTPUT_C)
 
 pixy2.set_lamp(1, 0)
 sleep(0.5)
@@ -24,9 +24,8 @@ MOTOR_SPEED = 10
 
 voice = True
 
-scan_on_x = 1
-scan_on_y = 0
-go_right = True
+i = 0 
+sequence=[1,1,1,1,2,-1,-1,-1,-1,2,1,1,1,1,-1,-1,-1,-1,-2,1,1,1,1,-2,-1,-1,-1,-1]
 compt = 0
 comptx = 0
 compty = 0
@@ -94,23 +93,17 @@ while True :
                 compt_dist += 1 
 
     else : 
-        print(scan_on_x, scan_on_y, go_right)
-        if scan_on_x < 4 and scan_on_x > 0: 
-            if go_right :
-                # motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=30 * 2.5)
-                scan_on_x += 1
-            else : 
-                # motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=-30 * 2.5)
-                scan_on_x -= 1
-        elif scan_on_x == 4 :
-            # motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,27)
-            scan_on_y += 1
-            go_right = not go_right
-
-        elif scan_on_x == 0 : 
-            # motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,27)
-            scan_on_y += 1
-            go_right = not go_right
-        
+        move = sequence[i]
+        if move == 1 : 
+            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=30 * 2.5)
+        elif move == -1 : 
+            motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=-30 * 2.5)
+        elif move == 2 : 
+            motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,27)
+        elif move == -2 : 
+            motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,-27)
+        i += 1 
+        if i ==28 : 
+            i = 0 
 
     sleep(0.2)
