@@ -46,6 +46,7 @@ pos_on_x = False
 pos_on_y = False
 detect = False
 compt_loss = 0 
+shoot = False
 test = input("start_scanning press enter")
 while True :
     nbr , target = pixy2.get_blocks(1,1)
