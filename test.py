@@ -15,6 +15,8 @@ pixy2 = Pixy2(port=2, i2c_address=0x54)
 motor_forward = LargeMotor(OUTPUT_A)
 motor_tilt = LargeMotor( OUTPUT_C)
 
+print(motor_forward.position , motor_tilt.position)
+
 pixy2.set_lamp(1, 0)
 sleep(0.5)
 pixy2.set_lamp(0, 0)
@@ -106,6 +108,8 @@ while True :
             motor_tilt.on_for_degrees(MOTOR_SPEED,MOTOR_SPEED,-27)
         i += 1 
         if i ==28 : 
+            print(motor_forward.position , motor_tilt.position)
+
             i = 0 
 
     sleep(0.2)
