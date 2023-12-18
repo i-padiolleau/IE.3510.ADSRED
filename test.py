@@ -11,7 +11,7 @@ from ev3dev2.sound import Sound
 from pixycamev3.pixy2 import Pixy2
 
 spkr = Sound()
-pixy2 = Pixy2(port=2, i2c_address=0x54)
+pixy2 = Pixy2(port=1, i2c_address=0x54)
 motor_forward = LargeMotor(OUTPUT_A)
 motor_tilt = LargeMotor( OUTPUT_C)
 motor_shoot = MediumMotor(OUTPUT_D)
