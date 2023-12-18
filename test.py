@@ -27,8 +27,8 @@ pixy2.set_lamp(0, 0)
 resolution = pixy2.get_resolution()
 
 def reboot(x, y, motor1, motor2) : 
-    motor1.on_to_position(20, x)
-    motor2.on_to_position(20, y)
+    motor1.on_to_position(10, x)
+    motor2.on_to_position(10, y)
     motor1.wait_until_not_moving() 
     motor2.wait_until_not_moving() 
 
