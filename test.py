@@ -49,14 +49,37 @@ while True :
         w = target[0].width
         h = target[0].height
         print(x, y , w, h)
+        # if Align :
+        #     if x < 148 : 
+        #         angle_x = 30 - (x/158 * 30)
+        #         motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
+        #         motor_forward.wait_until_not_moving()
+        #         compt = 0
+        #     elif x > 168 :
+        #         angle_x =  -((x-158)/158 * 30) 
+        #         motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
+        #         motor_forward.wait_until_not_moving()        
+        #         compt = 0
+        #     else : 
+        #         pos_on_x = True
+        #     if y < 94 : 
+        #         angle_y = 20 - (y/104 * 20)
+        #         motor_tilt.on_for_degrees(MOTOR_SPEED,angle_y)
+        #         motor_tilt.wait_until_not_moving()
+        #         compt = 0
+        #     elif y > 114 :
+        #         angle_y =  -((y-104)/104 * 20) 
+        #         motor_tilt.on_for_degrees(MOTOR_SPEED,angle_y)
+        #         motor_tilt.wait_until_not_moving()  
+        #         compt = 0
         if Align :
             if x < 148 : 
-                angle_x = 30 - (x/158 * 30)
+                angle_x =  -((x-158)/158 * 30)
                 motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
                 motor_forward.wait_until_not_moving()
                 compt = 0
             elif x > 168 :
-                angle_x =  -((x-158)/158 * 30) 
+                angle_x = 30 - (x/158 * 30)
                 motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
                 motor_forward.wait_until_not_moving()        
                 compt = 0
@@ -72,6 +95,7 @@ while True :
                 motor_tilt.on_for_degrees(MOTOR_SPEED,angle_y)
                 motor_tilt.wait_until_not_moving()  
                 compt = 0
+        
             else :
                 pos_on_y = True
             if pos_on_x and pos_on_y : 
