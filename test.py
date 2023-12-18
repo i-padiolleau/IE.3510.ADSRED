@@ -55,25 +55,28 @@ while True :
                 angle_x = 30 - (x/158 * 30)
                 motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
                 motor_forward.wait_until_not_moving()
+                compt = 0
             elif x > 168 :
                 angle_x =  -((x-158)/158 * 30) 
                 motor_forward.on_for_degrees(speed=MOTOR_SPEED, degrees=angle_x* 2.5)
                 motor_forward.wait_until_not_moving()        
+                compt = 0
             else : 
                 pos_on_x = True
             if y < 94 : 
                 angle_y = 20 - (y/104 * 20)
                 motor_tilt.on_for_degrees(MOTOR_SPEED,angle_y)
                 motor_tilt.wait_until_not_moving()
+                compt = 0
             elif y > 114 :
                 angle_y =  -((y-104)/104 * 20) 
                 motor_tilt.on_for_degrees(MOTOR_SPEED,angle_y)
-                motor_tilt.wait_until_not_moving()        
+                motor_tilt.wait_until_not_moving()  
+                compt = 0
             else :
                 pos_on_y = True
             if pos_on_x and pos_on_y : 
                 compt += 1 
-                print("presque")
             if compt >= 5 : 
                 print("ready")
                 Align = False
