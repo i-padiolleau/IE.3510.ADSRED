@@ -8,8 +8,8 @@ from ev3dev2.sound import Sound
 
 motor_forward = MediumMotor(OUTPUT_A)
 
-motor_forward.on_for_degrees(speed=10, degrees=-270)
+motor_forward.on_for_degrees(speed=20, degrees=-270)
 motor_forward.wait_until_not_moving()
 
-motor_forward.on_for_degrees(speed=10, degrees=270)
+motor_forward.on_for_degrees(speed=20, degrees=270)
 motor_forward.wait_until_not_moving()
