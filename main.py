@@ -42,7 +42,7 @@ class Robot() :
     def detect(self) :  
         nbr, target = self.pixy2.get_blocks(1,1)
 
-        if target >= 1 : 
+        if nbr >= 1 : 
             self.motor_forward.stop()
             self.motor_tilt.stop()
 
