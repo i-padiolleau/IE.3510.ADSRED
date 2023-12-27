@@ -19,6 +19,9 @@ class Robot() :
         self.motor_forward_starting_position = self.motor_forward.position
         self.motor_tilt_starting_position =  self.motor_tilt.position
 
+        self.angle_x = 0
+        self.angle_y = 0
+
         self.pixy2.set_lamp(1, 0)
         sleep(0.5)
         self.pixy2.set_lamp(0, 0)
@@ -43,8 +46,30 @@ class Robot() :
         nbr, target = self.pixy2.get_blocks(1,1)
 
         if nbr >= 1 : 
-            self.motor_forward.stop()
-            self.motor_tilt.stop()
+            return target
+        else : 
+            return []
+
+    def follow_target(self, target) : 
+        x = target[0].x_center
+        y = target[0].y_center
+        w = target[0].width
+        h = target[0].height
+
+        if x < 148 : 
+            self.angle_x = 30 - (x/158 * 30)
+        elif x > 168 :
+            self.angle_x =  -((x-158)/158 * 30) 
+        else : 
+            self.angle_x = 0
+
+        if y < 94 : 
+            self.angle_y = 20 - (y/104 * 20)
+        elif y > 114 :
+            self.angle_y =  -((y-104)/104 * 20) 
+        else : 
+            self.angle_y = 0 
+
 
 
 def main():
@@ -52,8 +77,11 @@ def main():
     robot = Robot(OUTPUT_A, OUTPUT_C, OUTPUT_D)
     t = Thread(target=robot.scan_sequence)
     t.start()
+    t1 = Thread(target=robot.detect())
     while True:
-        robot.detect()
+        if len(robot.detect()) > 0 :
+            robot.
+
 
 if __name__ == "__main__" :
     main()
