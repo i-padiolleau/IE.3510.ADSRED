@@ -130,6 +130,7 @@ class Robot() :
         else : 
             self.sequence()
         print(self.angle_x, self.angle_y)
+        sleep(1)
         
 
 
@@ -144,7 +145,6 @@ def main():
         t2 = Thread(target=robot.main_sequence)
         t2.start()
 
-        sleep(1)
 
 
 
