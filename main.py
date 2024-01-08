@@ -60,10 +60,8 @@ class Robot() :
     def movement(self) : 
 
         while True : 
-            self.motor_running = True
             self.motor_forward.wait_until_not_moving()
             self.motor_tilt.wait_until_not_moving()
-            self.motor_running = False
             self.motor_forward.on_for_degrees(speed=10, degrees=self.angle_x* 2.5)
             self.motor_tilt.on_for_degrees(speed=10, degrees=self.angle_y)
 

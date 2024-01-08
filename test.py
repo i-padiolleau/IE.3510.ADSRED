@@ -8,6 +8,8 @@ from ev3dev2.sensor.lego import TouchSensor
 from ev3dev2.led import Leds
 from ev3dev2.sound import Sound
 
+from math import sqrt
+
 from pixycamev3.pixy2 import Pixy2
 
 spkr = Sound()
@@ -100,11 +102,9 @@ while True :
         if compute_dist :
             if compt_dist >= 15 : 
                 average_w, average_h = map(lambda z: sum(z) / len(bb_box), zip(*bb_box))
-                print(average_w, average_h)  
-                distance_on_x = (125*316) / average_w
-                distance_on_y = (105*208) / average_h
-                print("distance with x : {}mm".format(distance_on_x))
-                print("distance with y : {}mm".format(distance_on_y))
+                average_diag = sqrt((average_w^2) + (average_h^2))
+
+                distance = (378*16) / average_diag
                 compute_dist = False  
                 shoot = True            
             else : 
