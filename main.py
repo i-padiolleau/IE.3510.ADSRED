@@ -137,13 +137,14 @@ class Robot() :
 def main():
 
     robot = Robot(OUTPUT_A, OUTPUT_C, OUTPUT_D)
+    t = Thread(target=robot.movement)
+    t.start()
+    t1 = Thread(target=robot.detect)
+    t1.start()
+    t2 = Thread(target=robot.main_sequence)
+    t2.start()
     while True:
-        t = Thread(target=robot.movement)
-        t.start()
-        t1 = Thread(target=robot.detect)
-        t1.start()
-        t2 = Thread(target=robot.main_sequence)
-        t2.start()
+        jsp = True
 
 
 
