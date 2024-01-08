@@ -93,6 +93,8 @@ class Robot() :
 
         self.distance = (378*16) / average_diag
 
+        print(self.distance)
+
     def detect(self) :  
         while True : 
             nbr, target = self.pixy2.get_blocks(1,1)
