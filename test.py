@@ -101,7 +101,7 @@ while True :
         if compute_dist :
             if compt_dist >= 15 : 
                 average_w, average_h = map(lambda z: sum(z) / len(bb_box), zip(*bb_box))
-                average_diag = sqrt((average_w^2) + (average_h^2))
+                average_diag = sqrt((average_w**2) + (average_h**2))
 
                 distance = (378*16) / average_diag
                 compute_dist = False  
