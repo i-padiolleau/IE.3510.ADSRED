@@ -94,7 +94,6 @@ while True :
                 print("ready")
                 Align = False
                 compute_dist = True
-                spkr.speak("Ready to fire") 
                 compt = 0 
 
 
@@ -113,7 +112,6 @@ while True :
                 compt_dist += 1 
 
         if shoot : 
-            spkr.speak("fire in the hole !")
             motor_tilt.on_for_degrees(10,20)
             motor_shoot.on_for_degrees(speed=20, degrees=-310)
             motor_shoot.wait_until_not_moving()
@@ -151,5 +149,3 @@ while True :
         if i ==len(sequence) : 
 
             i = 0 
-
-    sleep(0.2)

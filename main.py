@@ -100,7 +100,7 @@ def main():
     robot = Robot(OUTPUT_A, OUTPUT_C, OUTPUT_D)
     t = Thread(target=robot.scan_sequence)
     t.start()
-    t1 = Thread(target=robot.detect())
+    t1 = Thread(target=robot.detect)
     t1.start()
     while True:
         if len(robot.target) > 0 :
