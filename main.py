@@ -122,7 +122,14 @@ class Robot() :
 
         self.compute_dist()
      
-
+    def main(self): 
+        if len(self.target) > 0 :
+            self.follow_target()
+        else : 
+            self.sequence()
+        print(self.angle_x, self.angle_y)
+        
+        sleep(1)
 
 def main():
 
@@ -131,14 +138,9 @@ def main():
     t.start()
     t1 = Thread(target=robot.detect)
     t1.start()
-    while True:
-        if len(robot.target) > 0 :
-            robot.follow_target()
-        else : 
-            robot.sequence()
-        print(robot.angle_x, robot.angle_y)
-        
-        sleep(1)
+    t2 = Thread(target=robot.main)
+    t2.start()
+
 
 
 
