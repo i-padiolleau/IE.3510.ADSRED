@@ -123,7 +123,7 @@ while True :
             print(motor_tilt.position -motor_tilt_starting_position)
             print(distance)
             # print(compute_shooting_angle(motor_tilt.position -motor_tilt_starting_position, distance))
-            reglage_angle = 3,74 + (0.06*(motor_tilt.position -motor_tilt_starting_position))  + (13,37*distance)
+            reglage_angle = 3.74 + (0.06*(motor_tilt.position - motor_tilt_starting_position))  + (13.37*distance)
             # motor_tilt.on_for_degrees(10,20)
             motor_tilt.on_for_degrees(10,reglage_angle)
             motor_shoot.on_for_degrees(speed=23, degrees=-350)
