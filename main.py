@@ -135,6 +135,9 @@ def main():
             robot.follow_target()
         else : 
             robot.sequence()
+            print(robot.angle_x)
+            print(robot.angle_y)
+
         
         sleep(0.1)
 
