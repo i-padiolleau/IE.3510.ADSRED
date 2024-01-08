@@ -35,7 +35,7 @@ def reboot(x, y, motor1, motor2) :
     motor2.wait_while('running')
 
 def compute_shooting_angle(angle, distance) :
-    V = 5
+    V = 0.69
 
     shooting_angle = atan(((V**2)+sqrt((V**4)-(9.81*(9.81*(distance*cos(angle))**2))+2*distance*sin(angle)*(V**2)))/(9.81*distance*cos(angle))) 
 
@@ -111,10 +111,10 @@ while True :
                 average_diag = sqrt((average_w**2) + (average_h**2))
 
                 distance = (378*0.16) / average_diag
-                print((average_diag*0.16) / 378)
                 compute_dist = False  
                 shoot = True            
                 bb_box = []
+                compt_dist = 0
             else : 
                 bb_box.append([w,h])
                 compt_dist += 1 
