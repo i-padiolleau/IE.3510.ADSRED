@@ -139,13 +139,18 @@ while True :
         move = sequence[i]
         if move == 1 : 
             motor_forward.on_for_degrees(speed=10, degrees=30 * 2.5)
+            motor_forward.wait_until_not_moving()
         elif move == -1 : 
             motor_forward.on_for_degrees(speed=10, degrees=-30 * 2.5)
+            motor_forward.wait_until_not_moving()
         elif move == 2 : 
             motor_tilt.on_for_degrees(10,27)
+            motor_tilt.wait_until_not_moving()
         elif move == -2 : 
             motor_tilt.on_for_degrees(10,-27)
+            motor_tilt.wait_until_not_moving
         i += 1 
         if i ==len(sequence) : 
 
             i = 0 
+
