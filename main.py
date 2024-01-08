@@ -39,16 +39,36 @@ class Robot() :
         self.motor_forward.on_to_position(10, self.motor_forward_starting_position)
         self.motor_tilt.on_to_position(10, self.motor_tilt_starting_position)
 
-    def scan_sequence(self):
+    # def scan_sequence(self):
 
-        self.motor_forward.on_for_degrees(speed=10, degrees=60* 2.5)
-        self.motor_forward.on_for_degrees(speed=10, degrees=-120* 2.5)
-        self.motor_tilt.on_for_degrees(10,27)
-        self.motor_forward.on_for_degrees(speed=10, degrees=120* 2.5)
-        self.motor_tilt.on_for_degrees(10,27)
-        self.motor_forward.on_for_degrees(speed=10, degrees=-120* 2.5)
-        self.reboot()
-        self.scan_sequence()
+    #     self.motor_forward.on_for_degrees(speed=10, degrees=60* 2.5)
+    #     self.motor_forward.on_for_degrees(speed=10, degrees=-120* 2.5)
+    #     self.motor_tilt.on_for_degrees(10,27)
+    #     self.motor_forward.on_for_degrees(speed=10, degrees=120* 2.5)
+    #     self.motor_tilt.on_for_degrees(10,27)
+    #     self.motor_forward.on_for_degrees(speed=10, degrees=-120* 2.5)
+    #     self.reboot()
+    #     self.scan_sequence()
+
+    def movement(self) : 
+
+        self.motor_forward.on_for_degrees(speed=10, degrees=self.angle_x* 2.5)
+        self.motor_tilt.on_for_degrees(speed=10, degrees=self.angle_y)
+
+    def sequence(self) : 
+
+        move = self.sequence_list[i]
+        if move == 1 : 
+            self.angle_x = 30
+        elif move == -1 : 
+            self.angle_x = -30
+        elif move == 2 : 
+            self.angle_y = 30           
+        elif move == -2 : 
+            self.angle_y = -30 
+        i += 1 
+        if i ==len(self.sequence_list) : 
+            i = 0 
 
     def compute_dist(self):
 
@@ -98,13 +118,15 @@ class Robot() :
 def main():
 
     robot = Robot(OUTPUT_A, OUTPUT_C, OUTPUT_D)
-    t = Thread(target=robot.scan_sequence)
+    t = Thread(target=robot.movement)
     t.start()
     t1 = Thread(target=robot.detect)
     t1.start()
     while True:
         if len(robot.target) > 0 :
             robot.follow_target()
+        else : 
+            robot.sequence()
 
 
 if __name__ == "__main__" :
