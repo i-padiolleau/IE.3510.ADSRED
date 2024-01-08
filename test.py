@@ -29,8 +29,8 @@ resolution = pixy2.get_resolution()
 def reboot(x, y, motor1, motor2) : 
     motor1.on_to_position(10, x)
     motor2.on_to_position(10, y)
-    motor1.wait_until_not_moving() 
-    motor2.wait_until_not_moving() 
+    motor1.wait_while('running')() 
+    motor2.wait_while('running')() 
 
 voice = True
 
@@ -66,24 +66,24 @@ while True :
             if x < 148 : 
                 angle_x = 30 - (x/158 * 30)
                 motor_forward.on_for_degrees(speed=10, degrees=angle_x* 2.5)
-                motor_forward.wait_until_not_moving()
+                motor_forward.wait_while('running')
                 compt = 0
             elif x > 168 :
                 angle_x =  -((x-158)/158 * 30) 
                 motor_forward.on_for_degrees(speed=10, degrees=angle_x* 2.5)
-                motor_forward.wait_until_not_moving()        
+                motor_forward.wait_while('running')        
                 compt = 0
             else : 
                 pos_on_x = True
             if y < 94 : 
                 angle_y = 20 - (y/104 * 20)
                 motor_tilt.on_for_degrees(10,angle_y)
-                motor_tilt.wait_until_not_moving()
+                motor_tilt.wait_while('running')
                 compt = 0
             elif y > 114 :
                 angle_y =  -((y-104)/104 * 20) 
                 motor_tilt.on_for_degrees(10,angle_y)
-                motor_tilt.wait_until_not_moving()  
+                motor_tilt.wait_while('running')  
                 compt = 0
         
             else :
@@ -114,10 +114,10 @@ while True :
         if shoot : 
             motor_tilt.on_for_degrees(10,20)
             motor_shoot.on_for_degrees(speed=20, degrees=-310)
-            motor_shoot.wait_until_not_moving()
+            motor_shoot.wait_while('running')
 
             motor_shoot.on_for_degrees(speed=20, degrees=310)
-            motor_shoot.wait_until_not_moving()
+            motor_shoot.wait_while('running')
             reboot(motor_forward_starting_position , motor_tilt_starting_position,motor_forward, motor_tilt)
             i = 0 
             shoot = False
@@ -140,16 +140,16 @@ while True :
         print(move)
         if move == 1 : 
             motor_forward.on_for_degrees(speed=10, degrees=30 * 2.5)
-            motor_forward.wait_until_not_moving()
+            motor_forward.wait_while('running')
         elif move == -1 : 
             motor_forward.on_for_degrees(speed=10, degrees=-30 * 2.5)
-            motor_forward.wait_until_not_moving()
+            motor_forward.wait_while('running')
         elif move == 2 : 
             motor_tilt.on_for_degrees(10,27)
-            motor_tilt.wait_until_not_moving()
+            motor_tilt.wait_while('running')
         elif move == -2 : 
             motor_tilt.on_for_degrees(10,-27)
-            motor_tilt.wait_until_not_moving
+            motor_tilt.wait_while('running')
         i += 1 
         if i ==len(sequence) : 
 
