@@ -137,6 +137,7 @@ while True :
 
     else : 
         move = sequence[i]
+        print(move)
         if move == 1 : 
             motor_forward.on_for_degrees(speed=10, degrees=30 * 2.5)
             motor_forward.wait_until_not_moving()
