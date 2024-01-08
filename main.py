@@ -56,6 +56,7 @@ class Robot() :
 
     def movement(self) : 
 
+        print("test")
         self.motor_forward.on_for_degrees(speed=10, degrees=self.angle_x* 2.5)
         self.motor_tilt.on_for_degrees(speed=10, degrees=self.angle_y)
 
