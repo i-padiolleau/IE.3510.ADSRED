@@ -31,8 +31,8 @@ resolution = pixy2.get_resolution()
 def reboot(x, y, motor1, motor2) : 
     motor1.on_to_position(10, x)
     motor2.on_to_position(10, y)
-    motor1.wait_while('running')() 
-    motor2.wait_while('running')() 
+    motor1.wait_while('running')
+    motor2.wait_while('running')
 
 voice = True
 
