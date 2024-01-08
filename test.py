@@ -85,12 +85,12 @@ while True :
                 pos_on_x = True
             if y < 94 : 
                 angle_y = 20 - (y/104 * 20)
-                motor_tilt.on_for_degrees(10,angle_y)
+                motor_tilt.on_for_degrees(6,angle_y)
                 motor_tilt.wait_while('running')
                 compt = 0
             elif y > 114 :
                 angle_y =  -((y-104)/104 * 20) 
-                motor_tilt.on_for_degrees(10,angle_y)
+                motor_tilt.on_for_degrees(6,angle_y)
                 motor_tilt.wait_while('running')  
                 compt = 0
         
