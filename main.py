@@ -57,11 +57,17 @@ class Robot() :
 
     def movement(self) : 
 
-        self.motor_forward.on_for_degrees(speed=10, degrees=self.angle_x* 2.5)
-        self.motor_tilt.on_for_degrees(speed=10, degrees=self.angle_y)
+        while True : 
+            self.motor_forward.wait_until_not_moving()
+            self.motor_tilt.wait_until_not_moving()
+            self.motor_forward.on_for_degrees(speed=10, degrees=self.angle_x* 2.5)
+            self.motor_tilt.on_for_degrees(speed=10, degrees=self.angle_y)
+
 
     def sequence(self) : 
 
+        self.motor_forward.wait_until_not_moving()
+        self.motor_tilt.wait_until_not_moving()
         move = self.sequence_list[self.iteration]
         if move == 1 : 
             self.angle_x = 120
@@ -88,12 +94,13 @@ class Robot() :
         self.distance = (378*16) / average_diag
 
     def detect(self) :  
-        nbr, target = self.pixy2.get_blocks(1,1)
+        while True : 
+            nbr, target = self.pixy2.get_blocks(1,1)
 
-        if nbr >= 1 : 
-            self.target = target
-        else : 
-            self.target = []
+            if nbr >= 1 : 
+                self.target = target
+            else : 
+                self.target = []
 
     def follow_target(self) : 
         x = self.target[0].x_center
@@ -123,27 +130,26 @@ class Robot() :
         self.compute_dist()
      
     def main_sequence(self): 
-        self.motor_forward.wait_until_not_moving()
-        self.motor_tilt.wait_until_not_moving()
-        if len(self.target) > 0 :
-            self.follow_target()
-        else : 
-            self.sequence()
-        print(self.angle_x, self.angle_y)
+        while True : 
+            if len(self.target) > 0 :
+                self.motor_forward.stop()
+                self.motor_tilt.stop()
+                self.follow_target()
+            else : 
+                self.sequence()
+            print(self.angle_x, self.angle_y)
         
 
 
 def main():
 
     robot = Robot(OUTPUT_A, OUTPUT_C, OUTPUT_D)
-    while True:
-        t = Thread(target=robot.movement)
-        t.start()
-        t1 = Thread(target=robot.detect)
-        t1.start()
-        t2 = Thread(target=robot.main_sequence)
-        t2.start()
-        sleep(1)
+    t = Thread(target=robot.movement)
+    t.start()
+    t1 = Thread(target=robot.detect)
+    t1.start()
+    t2 = Thread(target=robot.main_sequence)
+    t2.start()
     # while True:
     #     jsp = True
 
