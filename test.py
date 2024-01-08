@@ -8,7 +8,7 @@ from ev3dev2.sensor.lego import TouchSensor
 from ev3dev2.led import Leds
 from ev3dev2.sound import Sound
 
-from math import sqrt
+from math import sqrt, cos , sin, atan
 
 from pixycamev3.pixy2 import Pixy2
 
@@ -33,6 +33,13 @@ def reboot(x, y, motor1, motor2) :
     motor2.on_to_position(15, y)
     motor1.wait_while('running')
     motor2.wait_while('running')
+
+def compute_shooting_angle(angle, distance) :
+    V = 10
+
+    shooting_angle = atan(((V**2)+sqrt((V**4)-(9.81*(9.81*(distance*cos(angle))**2))+2*distance*sin(angle)*(V**2)))/(9.81*distance*cos(angle))) 
+
+    return shooting_angle
 
 voice = True
 
@@ -103,7 +110,7 @@ while True :
                 average_w, average_h = map(lambda z: sum(z) / len(bb_box), zip(*bb_box))
                 average_diag = sqrt((average_w**2) + (average_h**2))
 
-                distance = (378*16) / average_diag
+                distance = (378*0.16) / average_diag
                 compute_dist = False  
                 shoot = True            
             else : 
@@ -111,6 +118,7 @@ while True :
                 compt_dist += 1 
 
         if shoot : 
+            print(compute_shooting_angle(motor_tilt.position -motor_tilt_starting_position, distance))
             motor_tilt.on_for_degrees(10,20)
             motor_shoot.on_for_degrees(speed=20, degrees=-310)
             motor_shoot.wait_while('running')
