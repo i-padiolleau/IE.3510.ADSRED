@@ -140,6 +140,7 @@ class Robot() :
             else : 
                 self.sequence()
             print(self.angle_x, self.angle_y)
+            sleep(1)
         
 
 
@@ -154,8 +155,6 @@ def main():
     t2.start()
     # while True:
     #     jsp = True
-
-
 
 
 
