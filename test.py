@@ -122,7 +122,7 @@ while True :
         if shoot : 
             print(motor_tilt.position -motor_tilt_starting_position)
             print(distance)
-            print(compute_shooting_angle(motor_tilt.position -motor_tilt_starting_position, distance))
+            # print(compute_shooting_angle(motor_tilt.position -motor_tilt_starting_position, distance))
             motor_tilt.on_for_degrees(10,20)
             motor_shoot.on_for_degrees(speed=20, degrees=-310)
             motor_shoot.wait_while('running')
