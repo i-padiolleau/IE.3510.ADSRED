@@ -42,6 +42,9 @@ class Robot() :
 
         self.motor_forward.on_to_position(10, self.motor_forward_starting_position)
         self.motor_tilt.on_to_position(10, self.motor_tilt_starting_position)
+        self.motor_forward.wait_until_not_moving()
+        self.motor_tilt.wait_until_not_moving()
+
 
     # def scan_sequence(self):
 
