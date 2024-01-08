@@ -95,11 +95,11 @@ class Robot() :
         else : 
             self.target = []
 
-    def follow_target(self, target) : 
-        x = target[0].x_center
-        y = target[0].y_center
-        w = target[0].width
-        h = target[0].height
+    def follow_target(self) : 
+        x = self.target[0].x_center
+        y = self.target[0].y_center
+        w = self.target[0].width
+        h = self.target[0].height
 
         if x < 148 : 
             self.angle_x = 30 - (x/158 * 30)
