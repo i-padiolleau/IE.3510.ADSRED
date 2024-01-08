@@ -13,7 +13,7 @@ from math import sqrt
 class Robot() : 
 
     def __init__(self, Port_out_forward, Port_out_tilt, Port_out_shoot ):
-        self.pixy2 = Pixy2(port=1, i2c_address=0x54)
+        self.pixy2 = Pixy2(port=2, i2c_address=0x54)
         self.motor_forward = LargeMotor(Port_out_forward)
         self.motor_tilt = LargeMotor(Port_out_tilt)
         self.motor_shoot = MediumMotor(Port_out_shoot)
