@@ -122,7 +122,7 @@ class Robot() :
 
         self.compute_dist()
      
-    def main(self): 
+    def main_sequence(self): 
         if len(self.target) > 0 :
             self.follow_target()
         else : 
@@ -138,8 +138,9 @@ def main():
     t.start()
     t1 = Thread(target=robot.detect)
     t1.start()
-    t2 = Thread(target=robot.main)
+    t2 = Thread(target=robot.main_sequence)
     t2.start()
+
 
 
 
