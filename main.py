@@ -64,12 +64,16 @@ class Robot() :
         move = self.sequence_list[self.iteration]
         if move == 1 : 
             self.angle_x = 30
+            self.angle_y = 0 
         elif move == -1 : 
             self.angle_x = -30
+            self.angle_y = 0 
         elif move == 2 : 
-            self.angle_y = 30           
+            self.angle_y = 30 
+            self.angle_x = 0          
         elif move == -2 : 
             self.angle_y = -30 
+            self.angle_x = 0
         self.iteration += 1 
         if self.iteration ==len(self.sequence_list) : 
             self.iteration = 0 
@@ -131,8 +135,8 @@ def main():
             robot.follow_target()
         else : 
             robot.sequence()
-        print(robot.angle_x)
-        print(robot.angle_y)
+        
+        sleep(0.1)
 
 
 
