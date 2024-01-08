@@ -35,7 +35,7 @@ def reboot(x, y, motor1, motor2) :
     motor2.wait_while('running')
 
 def compute_shooting_angle(angle, distance) :
-    V = 1
+    V = 5
 
     shooting_angle = atan(((V**2)+sqrt((V**4)-(9.81*(9.81*(distance*cos(angle))**2))+2*distance*sin(angle)*(V**2)))/(9.81*distance*cos(angle))) 
 
@@ -118,9 +118,9 @@ while True :
                 compt_dist += 1 
 
         if shoot : 
-            print(compute_shooting_angle(motor_tilt.position -motor_tilt_starting_position, distance))
             print(motor_tilt.position -motor_tilt_starting_position)
             print(distance)
+            print(compute_shooting_angle(motor_tilt.position -motor_tilt_starting_position, distance))
             motor_tilt.on_for_degrees(10,20)
             motor_shoot.on_for_degrees(speed=20, degrees=-310)
             motor_shoot.wait_while('running')
