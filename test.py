@@ -29,8 +29,8 @@ pixy2.set_lamp(0, 0)
 resolution = pixy2.get_resolution()
 
 def reboot(x, y, motor1, motor2) : 
-    motor1.on_to_position(10, x)
-    motor2.on_to_position(10, y)
+    motor1.on_to_position(15, x)
+    motor2.on_to_position(15, y)
     motor1.wait_while('running')
     motor2.wait_while('running')
 
@@ -57,7 +57,6 @@ while True :
     if nbr >= 1 : 
         detect = True
         if voice : 
-            spkr.speak("target detected") 
             voice = False
             Align = True
         x = target[0].x_center
@@ -67,24 +66,24 @@ while True :
         if Align :
             if x < 148 : 
                 angle_x = 30 - (x/158 * 30)
-                motor_forward.on_for_degrees(speed=10, degrees=angle_x* 2.5)
+                motor_forward.on_for_degrees(speed=15, degrees=angle_x* 2.5)
                 motor_forward.wait_while('running')
                 compt = 0
             elif x > 168 :
                 angle_x =  -((x-158)/158 * 30) 
-                motor_forward.on_for_degrees(speed=10, degrees=angle_x* 2.5)
+                motor_forward.on_for_degrees(speed=15, degrees=angle_x* 2.5)
                 motor_forward.wait_while('running')        
                 compt = 0
             else : 
                 pos_on_x = True
             if y < 94 : 
                 angle_y = 20 - (y/104 * 20)
-                motor_tilt.on_for_degrees(10,angle_y)
+                motor_tilt.on_for_degrees(15,angle_y)
                 motor_tilt.wait_while('running')
                 compt = 0
             elif y > 114 :
                 angle_y =  -((y-104)/104 * 20) 
-                motor_tilt.on_for_degrees(10,angle_y)
+                motor_tilt.on_for_degrees(15,angle_y)
                 motor_tilt.wait_while('running')  
                 compt = 0
         
@@ -139,16 +138,16 @@ while True :
         move = sequence[i]
         print(move)
         if move == 1 : 
-            motor_forward.on_for_degrees(speed=10, degrees=30 * 2.5)
+            motor_forward.on_for_degrees(speed=15, degrees=30 * 2.5)
             motor_forward.wait_while('running')
         elif move == -1 : 
-            motor_forward.on_for_degrees(speed=10, degrees=-30 * 2.5)
+            motor_forward.on_for_degrees(speed=15, degrees=-30 * 2.5)
             motor_forward.wait_while('running')
         elif move == 2 : 
-            motor_tilt.on_for_degrees(10,27)
+            motor_tilt.on_for_degrees(15,27)
             motor_tilt.wait_while('running')
         elif move == -2 : 
-            motor_tilt.on_for_degrees(10,-27)
+            motor_tilt.on_for_degrees(15,-27)
             motor_tilt.wait_while('running')
         i += 1 
         if i ==len(sequence) : 
