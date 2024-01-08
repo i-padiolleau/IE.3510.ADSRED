@@ -111,8 +111,10 @@ while True :
                 average_diag = sqrt((average_w**2) + (average_h**2))
 
                 distance = (378*0.16) / average_diag
+                print((average_diag*0.16) / 378)
                 compute_dist = False  
                 shoot = True            
+                bb_box = []
             else : 
                 bb_box.append([w,h])
                 compt_dist += 1 
