@@ -28,6 +28,8 @@ class Robot() :
 
         self.sequence_list = [-1,-1,-1,-1,1,1,1,1,1,1,1,1,2,-1,-1,-1,-1,-1,-1,-1,-1,2,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,-2,1,1,1,1,1,1,1,1,-2,-1,-1,-1,-1]
 
+        self.iteration = 0 
+
         self.bb_box = []
 
         self.distance = 0 
@@ -59,7 +61,7 @@ class Robot() :
 
     def sequence(self) : 
 
-        move = self.sequence_list[i]
+        move = self.sequence_list[self.iteration]
         if move == 1 : 
             self.angle_x = 30
         elif move == -1 : 
@@ -68,9 +70,9 @@ class Robot() :
             self.angle_y = 30           
         elif move == -2 : 
             self.angle_y = -30 
-        i += 1 
-        if i ==len(self.sequence_list) : 
-            i = 0 
+        self.iteration += 1 
+        if self.iteration ==len(self.sequence_list) : 
+            self.iteration = 0 
 
     def compute_dist(self):
 
