@@ -8,6 +8,8 @@ from ev3dev2.sound import Sound
 
 from pixycamev3.pixy2 import Pixy2
 
+from math import sqrt
+
 class Robot() : 
 
     def __init__(self, Port_out_forward, Port_out_tilt, Port_out_shoot ):
@@ -21,6 +23,12 @@ class Robot() :
 
         self.angle_x = 0
         self.angle_y = 0
+
+        self.target = []
+
+        self.bb_box = []
+
+        self.distance = 0 
 
         self.pixy2.set_lamp(1, 0)
         sleep(0.5)
@@ -42,13 +50,21 @@ class Robot() :
         self.reboot()
         self.scan_sequence()
 
+    def compute_dist(self):
+
+        average_w, average_h = map(lambda z: sum(z) / len(self.bb_box), zip(*self.bb_box))
+
+        average_diag = sqrt((average_w^2) + (average_h^2))
+
+        self.distance = (378*16) / average_diag
+
     def detect(self) :  
         nbr, target = self.pixy2.get_blocks(1,1)
 
         if nbr >= 1 : 
-            return target
+            self.target = target
         else : 
-            return []
+            self.target = []
 
     def follow_target(self, target) : 
         x = target[0].x_center
@@ -70,6 +86,13 @@ class Robot() :
         else : 
             self.angle_y = 0 
 
+        self.motor_forward.on_for_degrees(speed=10, degrees=self.angle_x* 2.5)
+        self.motor_tilt.on_for_degrees(speed=10, degrees=self.angle_y)
+
+        self.bb_box.append([w,h])
+
+        self.compute_dist()
+     
 
 
 def main():
@@ -78,9 +101,10 @@ def main():
     t = Thread(target=robot.scan_sequence)
     t.start()
     t1 = Thread(target=robot.detect())
+    t1.start()
     while True:
-        if len(robot.detect()) > 0 :
-            robot.
+        if len(robot.target) > 0 :
+            robot.follow_target()
 
 
 if __name__ == "__main__" :
