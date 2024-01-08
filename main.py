@@ -34,7 +34,7 @@ class Robot() :
 
         self.distance = 0 
 
-        self.motor_running = False
+        self.motor_running = True
 
         self.pixy2.set_lamp(1, 0)
         sleep(0.5)
