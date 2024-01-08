@@ -129,17 +129,20 @@ class Robot() :
             self.sequence()
         print(self.angle_x, self.angle_y)
         
-        sleep(1)
+
 
 def main():
 
     robot = Robot(OUTPUT_A, OUTPUT_C, OUTPUT_D)
-    t = Thread(target=robot.movement)
-    t.start()
-    t1 = Thread(target=robot.detect)
-    t1.start()
-    t2 = Thread(target=robot.main_sequence)
-    t2.start()
+    while True:
+        t = Thread(target=robot.movement)
+        t.start()
+        t1 = Thread(target=robot.detect)
+        t1.start()
+        t2 = Thread(target=robot.main_sequence)
+        t2.start()
+
+        sleep(1)
 
 
 
