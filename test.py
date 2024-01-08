@@ -126,10 +126,10 @@ while True :
             # motor_tilt.on_for_degrees(10,20)
             a = input("test : ")
             motor_tilt.on_for_degrees(10,int(a))
-            motor_shoot.on_for_degrees(speed=23, degrees=-310)
+            motor_shoot.on_for_degrees(speed=23, degrees=-340)
             motor_shoot.wait_while('running')
 
-            motor_shoot.on_for_degrees(speed=23, degrees=310)
+            motor_shoot.on_for_degrees(speed=23, degrees=340)
             motor_shoot.wait_while('running')
             reboot(motor_forward_starting_position , motor_tilt_starting_position,motor_forward, motor_tilt)
             i = 0 
