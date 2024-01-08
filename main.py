@@ -26,7 +26,7 @@ class Robot() :
 
         self.target = []
 
-        self.sequence_list = [-1,-1,-1,-1,1,1,1,1,1,1,1,1,2,-1,-1,-1,-1,-1,-1,-1,-1,2,1,1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1,-1,-2,1,1,1,1,1,1,1,1,-2,-1,-1,-1,-1]
+        self.sequence_list = [1,2,-1,2,1,2,-1,1,-2,-1,-2,1,-2,-1]
 
         self.iteration = 0 
 
@@ -56,7 +56,6 @@ class Robot() :
 
     def movement(self) : 
 
-        print("test")
         self.motor_forward.on_for_degrees(speed=10, degrees=self.angle_x* 2.5)
         self.motor_tilt.on_for_degrees(speed=10, degrees=self.angle_y)
 
@@ -64,10 +63,10 @@ class Robot() :
 
         move = self.sequence_list[self.iteration]
         if move == 1 : 
-            self.angle_x = 30
+            self.angle_x = 120
             self.angle_y = 0 
         elif move == -1 : 
-            self.angle_x = -30
+            self.angle_x = -120
             self.angle_y = 0 
         elif move == 2 : 
             self.angle_y = 30 
