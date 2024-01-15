@@ -4,12 +4,26 @@ from ev3dev2.motor import MediumMotor , LargeMotor, OUTPUT_A,OUTPUT_B, OUTPUT_D
 
 from math import sqrt
 
+import json
+
 from pixycamev3.pixy2 import Pixy2
 
 class Robot(): 
 
     def __init__(self):
-        
+
+        #load the config
+        with open("config.json", 'r') as json_file:
+            config_data = json.load(json_file)
+        self.frame_compute_distance = config_data["number of frame to compute the distance of the target"]
+        self.frame_lose_target = config_data["number of frame to tell that the target is lose"]
+        self.frame_consider_align = config_data["number of frame to tell that the target is consider align"]
+        self.zone_align_x = config_data["number of pixel from the border of the align zone to the center on x axis"]
+        self.zone_align_y = config_data["number of pixel from the border of the align zone to the center on y axis"]
+        self.speed_forward = config_data["speed on the motor on the x axis"]
+        self.speed_tilt = config_data["speed on the motor on y axis"]
+
+
         # Initialize Pixy2 camera, motors
         self.pixy2 = Pixy2(port=1, i2c_address=0x54)
         self.motor_forward = LargeMotor(OUTPUT_A)
@@ -78,15 +92,15 @@ class Robot():
     def align_camera_on_target(self,x,y) :
 
         #Case where the target is at the left of the image
-        if x < 148 : 
+        if x < 158 + self.zone_align_x : 
             angle_x = 30 - (x/158 * 30)
-            self.motor_forward.on_for_degrees(speed=15, degrees=angle_x* 2.5)
+            self.motor_forward.on_for_degrees(speed=self.speed_forward, degrees=angle_x* 2.5)
             self.motor_forward.wait_while('running')
             self.compt = 0
         #Case where the target is at the right of the image
-        elif x > 168 :
+        elif x > 158 - self.zone_align_x :
             angle_x =  -((x-158)/158 * 30) 
-            self.motor_forward.on_for_degrees(speed=15, degrees=angle_x* 2.5)
+            self.motor_forward.on_for_degrees(speed=self.speed_forward, degrees=angle_x* 2.5)
             self.motor_forward.wait_while('running')        
             self.compt = 0
         #Consider the target is align on the x axis
@@ -95,15 +109,15 @@ class Robot():
 
         print(y)
         #Case where the target is at the bottom of the image
-        if y < 94 : 
+        if y < 104 - self.zone_align_y : 
             angle_y = 20 - (y/104 * 20)
-            self.motor_tilt.on_for_degrees(6,angle_y)
+            self.motor_tilt.on_for_degrees(self.speed_forward,angle_y)
             self.motor_tilt.wait_while('running')
             self.compt = 0
         #Case where the target is at the top of the image
-        elif y > 114 :
+        elif y > 104 + self.zone_align_y :
             angle_y =  -((y-104)/104 * 20) 
-            self.motor_tilt.on_for_degrees(6,angle_y)
+            self.motor_tilt.on_for_degrees(self.speed_forward,angle_y)
             self.motor_tilt.wait_while('running')  
             self.compt = 0    
         else :
@@ -114,7 +128,7 @@ class Robot():
             self.compt += 1
 
         #For the number of frame the camera and the target have been align, we can go the other phase
-        if self.compt >= 5 : 
+        if self.compt >= self.frame_consider_align : 
             self.Align = False
             self.compute_dist = True
             self.compt = 0
@@ -122,7 +136,7 @@ class Robot():
     def compute_distance_target(self,w,h) :
 
         #We have get bbox values for x frames and can compute
-        if self.compt_dist >= 15 : 
+        if self.compt_dist >= self.frame_compute_distance : 
             average_w, average_h = map(lambda z: sum(z) / len(self.bb_box), zip(*self.bb_box))
 
             #Pythagore and rule of 3 to estimate the distance
@@ -179,7 +193,7 @@ class Robot():
     def loose_target_verification(self) : 
 
         #The target have been lost for x frame so we reboot the system
-        if self.compt_loss >= 5 : 
+        if self.compt_loss >= self.frame_lose_target : 
             self.loose_target = False
             self.reboot
             self.compt_loss = 0 
@@ -194,16 +208,16 @@ class Robot():
         #Apply the sequence of scan 
         move = self.sequence[self.indx_sequence]
         if move == 1 : 
-            self.motor_forward.on_for_degrees(speed=15, degrees=30 * 2.5)
+            self.motor_forward.on_for_degrees(speed=self.speed_forward, degrees=30 * 2.5)
             self.motor_forward.wait_while('running')
         elif move == -1 : 
-            self.motor_forward.on_for_degrees(speed=15, degrees=-30 * 2.5)
+            self.motor_forward.on_for_degrees(speed=self.speed_forward, degrees=-30 * 2.5)
             self.motor_forward.wait_while('running')
         elif move == 2 : 
-            self.motor_tilt.on_for_degrees(10,27)
+            self.motor_tilt.on_for_degrees(self.speed_tilt,27)
             self.motor_tilt.wait_while('running')
         elif move == -2 : 
-            self.motor_tilt.on_for_degrees(10,-27)
+            self.motor_tilt.on_for_degrees(self.speed_tilt,-27)
             self.motor_tilt.wait_while('running')
         self.indx_sequence += 1 
         #We arrive at the starting point of the sequence so reset the index

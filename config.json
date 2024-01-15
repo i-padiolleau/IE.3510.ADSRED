@@ -1,0 +1,10 @@
+{
+    "number of frame to compute the distance of the target" : 15,
+    "number of frame to tell that the target is lose" : 5,
+    "number of frame to tell that the target is consider align" : 5,
+    "number of pixel from the border of the align zone to the center on x axis" : 10,
+    "number of pixel from the border of the align zone to the center on y axis" : 10,
+    "speed on the motor on the x axis" : 15,
+    "speed on the motor on the y axis" : 15
+    
+}
