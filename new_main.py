@@ -190,7 +190,7 @@ class Robot():
         if self.left_ammo == 0:
             self.is_running = False
 
-    def output_shooting_information(self, reglage_angle):
+    def output_shooting_information(self, reglage_angle, result):
 
         report = ("-"*20) + "\n"
         report = report +"Cordinate about the target : " + str(self.motor_forward.position - self.motor_forward_starting_position)
@@ -198,6 +198,7 @@ class Robot():
         report = report + "\n" + "Distance : " + str(self.distance)
         report = report + "\n" + "Shooting angle : " + str(reglage_angle)
         report = report + "\n" + "Ammo left : " + str(self.left_ammo)
+        report = report + "\n" + "Shoot result : " + result
         
         self.final_report.append(report)
 
