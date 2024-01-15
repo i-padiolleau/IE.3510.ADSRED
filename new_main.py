@@ -156,7 +156,7 @@ class Robot():
 
         #Apply the angle and shoot 
         self.motor_tilt.on_for_degrees(10,reglage_angle)
-        self.motor_forward.on_for_degrees(10, correction_robot)
+        self.motor_forward.on_for_degrees(10, correction_robot*2.5)
         self.motor_shoot.on_for_degrees(speed=23, degrees=-380)
         self.motor_shoot.wait_while('running')
 
