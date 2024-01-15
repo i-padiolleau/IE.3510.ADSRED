@@ -107,7 +107,6 @@ class Robot():
         else : 
             self.pos_on_x = True
 
-        print(y)
         #Case where the target is at the bottom of the image
         if y < 104 - self.zone_align_y : 
             angle_y = 20 - (y/104 * 20)
