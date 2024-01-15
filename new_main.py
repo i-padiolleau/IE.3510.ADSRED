@@ -166,6 +166,8 @@ class Robot():
         self.shoot = False
         self.try_detect_target = True 
 
+        self.left_ammo -= 1
+
         if self.left_ammo == 0:
             self.is_running = False
 
