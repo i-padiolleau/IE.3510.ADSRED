@@ -20,8 +20,8 @@ class Robot():
         self.frame_consider_align = config_data["number of frame to tell that the target is consider align"]
         self.zone_align_x = config_data["number of pixel from the border of the align zone to the center on x axis"]
         self.zone_align_y = config_data["number of pixel from the border of the align zone to the center on y axis"]
-        self.speed_forward = config_data["speed on the motor on the x axis"]
-        self.speed_tilt = config_data["speed on the motor on y axis"]
+        self.speed_forward = config_data["speed of the motor on the x axis"]
+        self.speed_tilt = config_data["speed of the motor on the y axis"]
 
 
         # Initialize Pixy2 camera, motors
