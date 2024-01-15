@@ -224,4 +224,6 @@ class Robot():
             self.output_information()
 
             
-            
+robot = Robot()
+
+robot.main()
