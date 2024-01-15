@@ -149,11 +149,11 @@ class Robot():
 
         self.motor_shoot.on_for_degrees(speed=23, degrees=380)
         self.motor_shoot.wait_while('running')
+        self.left_ammo -= 1
         self.output_shooting_information(reglage_angle)
         self.reboot()
         self.shoot = False
-        self.try_detect_target = True
-        self.left_ammo -= 1 
+        self.try_detect_target = True 
 
         if self.left_ammo == 0:
             self.is_running = False
