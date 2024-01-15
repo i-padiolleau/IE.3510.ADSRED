@@ -43,8 +43,6 @@ class Robot():
         self.indx_sequence = 0
         
         self.compt = 0
-        self.comptx = 0
-        self.compty = 0
         self.compt_dist = 0
         self.compute_dist = False
         self.bb_box = []
@@ -128,6 +126,7 @@ class Robot():
 
         print(self.compt)
         print(self.pos_on_y)
+        print(self.pos_on_x)
 
         #For the number of frame the camera and the target have been align, we can go the other phase
         if self.compt >= self.frame_consider_align : 
