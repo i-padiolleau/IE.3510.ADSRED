@@ -265,6 +265,7 @@ class Robot():
 
         ready = input("Press enter when the reload is done : ")
         self.is_running = True
+        self.left_ammo = 7
         self.main()
             
 robot = Robot()
