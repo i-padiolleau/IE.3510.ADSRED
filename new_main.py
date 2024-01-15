@@ -42,6 +42,9 @@ class Robot():
         self.distance = 0
         self.try_detect_target = True
         self.Align = False
+        self.final_report = []
+        self.left_ammo = 7
+        self.is_running = True
 
         #Led switch on and off to show init is finish
         self.pixy2.set_lamp(1, 0)
@@ -49,12 +52,12 @@ class Robot():
         self.pixy2.set_lamp(0, 0)
 
     def output_information(self):
-        if self.Align:
+        if self.compute_dist:
+            statu = "Shooting"        
+        elif self.Align:
             statu = "Aligning"
         elif self.compute_dist:
             statu = "Computing distance"
-        elif self.compute_dist:
-            statu = "Shooting"
         elif self.compt_loss > 0 :
             statu = "Looking for the lost Target"
         else : 
@@ -90,6 +93,7 @@ class Robot():
         else : 
             self.pos_on_x = True
 
+        print(y)
         #Case where the target is at the bottom of the image
         if y < 94 : 
             angle_y = 20 - (y/104 * 20)
@@ -145,16 +149,38 @@ class Robot():
 
         self.motor_shoot.on_for_degrees(speed=23, degrees=380)
         self.motor_shoot.wait_while('running')
+        self.output_shooting_information(reglage_angle)
         self.reboot()
         self.shoot = False
         self.try_detect_target = True
+        self.left_ammo -= 1 
+
+        if self.left_ammo == 0:
+            self.is_running = False
+
+    def output_shooting_information(self, reglage_angle):
+
+        report = ("-"*20) + "\n"
+        report += "Cordinate about the target : " + str(self.motor_forward.position - self.motor_forward_starting_position)
+        report = report + " " + str(self.motor_tilt.position - self.motor_tilt_starting_position)
+        report = "\n" + "Distance : " + str(self.distance)
+        report = "\n" + "Shooting angle : " + str(reglage_angle)
+        report = "\n" + "Ammo left : " + str(self.left_ammo)
+        
+        self.final_report.append(report)
+
+        with open('final_report.txt', 'w') as file:
+            for item in self.final_report:
+                file.write("%s\n" % item)
+
+        print(report)
+
 
     def loose_target_verification(self) : 
 
         #The target have been lost for x frame so we reboot the system
         if self.compt_loss >= 5 : 
             self.loose_target = False
-            print("target lose")
             self.reboot
             self.compt_loss = 0 
             self.Align = False
@@ -188,7 +214,7 @@ class Robot():
 
     def main(self):
 
-        while True :
+        while self.is_running :
             nbr , target = self.pixy2.get_blocks(1,1)
             if nbr >= 1 :
                 self.loose_target = True
@@ -224,6 +250,9 @@ class Robot():
 
             self.output_information()
 
+        ready = input("Press enter when the reload is done : ")
+        self.is_running = True
+        self.main()
             
 robot = Robot()
 
