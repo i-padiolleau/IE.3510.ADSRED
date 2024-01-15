@@ -155,7 +155,7 @@ class Robot():
             command_shoot = input("press enter to shoot") 
         #We compute the angle to add determine by our equation
         reglage_angle = 3.74 + (0.06*(self.motor_tilt.position - self.motor_tilt_starting_position))  + (13.37*self.distance)
-        correction_robot = degrees(atan(4/(self.distance*100)))
+        correction_robot = -degrees(atan(4/(self.distance*100)))
         print(correction_robot)
 
 
