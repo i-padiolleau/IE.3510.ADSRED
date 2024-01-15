@@ -110,13 +110,13 @@ class Robot():
         #Case where the target is at the bottom of the image
         if y < 104 - self.zone_align_y : 
             angle_y = 20 - (y/104 * 20)
-            self.motor_tilt.on_for_degrees(self.speed_forward,angle_y)
+            self.motor_tilt.on_for_degrees(self.speed_tilt,angle_y)
             self.motor_tilt.wait_while('running')
             self.compt = 0
         #Case where the target is at the top of the image
         elif y > 104 + self.zone_align_y :
             angle_y =  -((y-104)/104 * 20) 
-            self.motor_tilt.on_for_degrees(self.speed_forward,angle_y)
+            self.motor_tilt.on_for_degrees(self.speed_tilt,angle_y)
             self.motor_tilt.wait_while('running')  
             self.compt = 0    
         else :
@@ -125,6 +125,9 @@ class Robot():
         #Consider the target is align with the camera
         if self.pos_on_x and self.pos_on_y : 
             self.compt += 1
+
+        print(self.compt)
+        print(self.pos_on_y)
 
         #For the number of frame the camera and the target have been align, we can go the other phase
         if self.compt >= self.frame_consider_align : 
