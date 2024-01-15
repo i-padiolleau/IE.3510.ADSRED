@@ -167,6 +167,8 @@ class Robot():
         self.motor_shoot.on_for_degrees(speed=23, degrees=380)
         self.motor_shoot.wait_while('running')
         
+        self.left_ammo -= 1
+
         if not self.mode :
             shoot_sucess = int(input("1 for sucess, 2 for miss"))
             if shoot_sucess == 1 : 
@@ -185,7 +187,6 @@ class Robot():
             self.shoot = False
             self.try_detect_target = True 
 
-        self.left_ammo -= 1
 
         if self.left_ammo == 0:
             self.is_running = False
