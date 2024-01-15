@@ -41,6 +41,7 @@ class Robot():
         self.shoot = False
         self.distance = 0
         self.try_detect_target = True
+        self.Align = False
 
         #Led switch on and off to show init is finish
         self.pixy2.set_lamp(1, 0)
