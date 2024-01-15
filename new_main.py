@@ -22,6 +22,7 @@ class Robot():
         self.zone_align_y = config_data["number of pixel from the border of the align zone to the center on y axis"]
         self.speed_forward = config_data["speed of the motor on the x axis"]
         self.speed_tilt = config_data["speed of the motor on the y axis"]
+        self.mode = config_data["mode of the robot (True for auto and false for manual)"]
 
 
         # Initialize Pixy2 camera, motors
@@ -150,9 +151,12 @@ class Robot():
 
     def shooting_sequence(self):
 
+        if not self.mode :
+            command_shoot = input("press enter to shoot") 
         #We compute the angle to add determine by our equation
         reglage_angle = 3.74 + (0.06*(self.motor_tilt.position - self.motor_tilt_starting_position))  + (13.37*self.distance)
         correction_robot = atan(4/(self.distance*100))
+        print(correction_robot)
 
         #Apply the angle and shoot 
         self.motor_tilt.on_for_degrees(10,reglage_angle)
@@ -163,10 +167,23 @@ class Robot():
         self.motor_shoot.on_for_degrees(speed=23, degrees=380)
         self.motor_shoot.wait_while('running')
         
-        self.output_shooting_information(reglage_angle)
-        self.reboot()
-        self.shoot = False
-        self.try_detect_target = True 
+        if not self.mode :
+            shoot_sucess = int(input("1 for sucess, 2 for miss"))
+            if shoot_sucess == 1 : 
+                self.output_shooting_information(reglage_angle,"sucess")
+                self.output_shooting_information(reglage_angle,"Dont know")
+                self.reboot()
+                self.shoot = False
+                self.try_detect_target = True 
+            else : 
+                self.output_shooting_information(reglage_angle,"miss")
+                self.shoot = False
+                self.compute_dist = True
+        else : 
+            self.output_shooting_information(reglage_angle,"Dont know")
+            self.reboot()
+            self.shoot = False
+            self.try_detect_target = True 
 
         self.left_ammo -= 1
 

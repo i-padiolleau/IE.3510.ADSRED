@@ -5,6 +5,7 @@
     "number of pixel from the border of the align zone to the center on x axis" : 6,
     "number of pixel from the border of the align zone to the center on y axis" : 13,
     "speed of the motor on the x axis" : 15,
-    "speed of the motor on the y axis" : 6
+    "speed of the motor on the y axis" : 6,
+    "mode of the robot (True for auto and false for manual)" : true
     
 }
