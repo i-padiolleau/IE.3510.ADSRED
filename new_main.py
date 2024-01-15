@@ -90,13 +90,13 @@ class Robot():
     def align_camera_on_target(self,x,y) :
 
         #Case where the target is at the left of the image
-        if x < 158 + self.zone_align_x : 
+        if x < 158 - self.zone_align_x : 
             angle_x = 30 - (x/158 * 30)
             self.motor_forward.on_for_degrees(speed=self.speed_forward, degrees=angle_x* 2.5)
             self.motor_forward.wait_while('running')
             self.compt = 0
         #Case where the target is at the right of the image
-        elif x > 158 - self.zone_align_x :
+        elif x > 158 + self.zone_align_x :
             angle_x =  -((x-158)/158 * 30) 
             self.motor_forward.on_for_degrees(speed=self.speed_forward, degrees=angle_x* 2.5)
             self.motor_forward.wait_while('running')        
@@ -123,10 +123,6 @@ class Robot():
         #Consider the target is align with the camera
         if self.pos_on_x and self.pos_on_y : 
             self.compt += 1
-
-        print(self.compt)
-        print(self.pos_on_y)
-        print(self.pos_on_x)
 
         #For the number of frame the camera and the target have been align, we can go the other phase
         if self.compt >= self.frame_consider_align : 
