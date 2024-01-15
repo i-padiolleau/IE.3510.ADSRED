@@ -149,7 +149,7 @@ class Robot():
 
         self.motor_shoot.on_for_degrees(speed=23, degrees=380)
         self.motor_shoot.wait_while('running')
-        self.left_ammo -= 1
+        
         self.output_shooting_information(reglage_angle)
         self.reboot()
         self.shoot = False
@@ -161,11 +161,11 @@ class Robot():
     def output_shooting_information(self, reglage_angle):
 
         report = ("-"*20) + "\n"
-        report += "Cordinate about the target : " + str(self.motor_forward.position - self.motor_forward_starting_position)
+        report = report +"Cordinate about the target : " + str(self.motor_forward.position - self.motor_forward_starting_position)
         report = report + " " + str(self.motor_tilt.position - self.motor_tilt_starting_position)
-        report = "\n" + "Distance : " + str(self.distance)
-        report = "\n" + "Shooting angle : " + str(reglage_angle)
-        report = "\n" + "Ammo left : " + str(self.left_ammo)
+        report = report + "\n" + "Distance : " + str(self.distance)
+        report = report + "\n" + "Shooting angle : " + str(reglage_angle)
+        report = report + "\n" + "Ammo left : " + str(self.left_ammo)
         
         self.final_report.append(report)
 
