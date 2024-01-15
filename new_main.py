@@ -2,7 +2,7 @@ from time import sleep
 
 from ev3dev2.motor import MediumMotor , LargeMotor, OUTPUT_A,OUTPUT_B, OUTPUT_D
 
-from math import sqrt
+from math import sqrt, atan
 
 import json
 
@@ -152,9 +152,11 @@ class Robot():
 
         #We compute the angle to add determine by our equation
         reglage_angle = 3.74 + (0.06*(self.motor_tilt.position - self.motor_tilt_starting_position))  + (13.37*self.distance)
+        correction_robot = atan(4/(self.distance*100))
 
         #Apply the angle and shoot 
         self.motor_tilt.on_for_degrees(10,reglage_angle)
+        self.motor_forward.on_for_degrees(correction_robot)
         self.motor_shoot.on_for_degrees(speed=23, degrees=-380)
         self.motor_shoot.wait_while('running')
 
