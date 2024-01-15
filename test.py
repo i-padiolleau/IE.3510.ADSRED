@@ -34,12 +34,6 @@ def reboot(x, y, motor1, motor2) :
     motor1.wait_while('running')
     motor2.wait_while('running')
 
-def compute_shooting_angle(angle, distance) :
-    V = 0.69
-
-    shooting_angle = atan(((V**2)+sqrt((V**4)-(9.81*(9.81*(distance*cos(angle))**2))+2*distance*sin(angle)*(V**2)))/(9.81*distance*cos(angle))) 
-
-    return shooting_angle
 
 voice = True
 
